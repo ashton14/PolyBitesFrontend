@@ -108,7 +108,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/profiles/auth/${userId}`);
+      const response = await fetch(`https://polybitesbackend.onrender.com/api/profiles/auth/${userId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch profile');
       }
@@ -171,8 +171,8 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
         setLikeLoading(new Set());
         
         const [reviewsResponse, statsResponse] = await Promise.all([
-          fetch(`http://localhost:5000/api/food-reviews/food/${foodItem.id}`),
-          fetch(`http://localhost:5000/api/food-reviews/food/${foodItem.id}/stats`)
+          fetch(`https://polybitesbackend.onrender.com/api/food-reviews/food/${foodItem.id}`),
+          fetch(`https://polybitesbackend.onrender.com/api/food-reviews/food/${foodItem.id}/stats`)
         ]);
 
         if (!reviewsResponse.ok) {
@@ -201,7 +201,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
           // Batch fetch like counts for all reviews
           const likeCountsPromises = reviewsData.map(async (review) => {
             try {
-              const likeResponse = await fetch(`http://localhost:5000/api/food-reviews/${review.id}/likes`);
+              const likeResponse = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/${review.id}/likes`);
               if (likeResponse.ok) {
                 const likeData = await likeResponse.json();
                 return { reviewId: review.id, count: likeData.likes || 0 };
@@ -224,7 +224,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
           if (user) {
             const userLikesPromises = reviewsData.map(async (review) => {
               try {
-                const likeResponse = await fetch(`http://localhost:5000/api/food-reviews/${review.id}/like/${user.id}`);
+                const likeResponse = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/${review.id}/like/${user.id}`);
                 if (likeResponse.ok) {
                   const { exists } = await likeResponse.json();
                   return { reviewId: review.id, liked: exists };
@@ -271,7 +271,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     async function fetchOwnProfileName() {
       if (user && user.id && !userNames[user.id]) {
         try {
-          const response = await fetch(`http://localhost:5000/api/profiles/auth/${user.id}`);
+          const response = await fetch(`https://polybitesbackend.onrender.com/api/profiles/auth/${user.id}`);
           if (response.ok) {
             const profile = await response.json();
             console.log('Fetched profile for current user:', profile); // DEBUG
@@ -319,7 +319,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
 
   const handleSubmitReview = async (reviewData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/food-reviews', {
+      const response = await fetch('https://polybitesbackend.onrender.com/api/food-reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -333,8 +333,8 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
 
       // Fetch updated reviews and stats
       const [updatedReviewsResponse, updatedStatsResponse] = await Promise.all([
-        fetch(`http://localhost:5000/api/food-reviews/food/${foodItem.id}`),
-        fetch(`http://localhost:5000/api/food-reviews/food/${foodItem.id}/stats`)
+        fetch(`https://polybitesbackend.onrender.com/api/food-reviews/food/${foodItem.id}`),
+        fetch(`https://polybitesbackend.onrender.com/api/food-reviews/food/${foodItem.id}/stats`)
       ]);
 
       if (updatedReviewsResponse.ok && updatedStatsResponse.ok) {
@@ -399,7 +399,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/food-reviews/${reviewId}`, {
+      const response = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/${reviewId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -416,8 +416,8 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
 
       // Fetch updated reviews and stats
       const [updatedReviewsResponse, updatedStatsResponse] = await Promise.all([
-        fetch(`http://localhost:5000/api/food-reviews/food/${foodItem.id}`),
-        fetch(`http://localhost:5000/api/food-reviews/food/${foodItem.id}/stats`)
+        fetch(`https://polybitesbackend.onrender.com/api/food-reviews/food/${foodItem.id}`),
+        fetch(`https://polybitesbackend.onrender.com/api/food-reviews/food/${foodItem.id}/stats`)
       ]);
 
       if (updatedReviewsResponse.ok && updatedStatsResponse.ok) {
@@ -463,7 +463,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
       setLikeLoading(prev => new Set(prev).add(reviewId));
 
       // Call the toggle like API
-      const response = await fetch(`http://localhost:5000/api/food-reviews/${reviewId}/toggle-like`, {
+      const response = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/${reviewId}/toggle-like`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

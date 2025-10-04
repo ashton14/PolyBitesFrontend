@@ -151,7 +151,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
     
     // Also refresh food ratings for this restaurant
     try {
-      const ratingsResponse = await fetch(`http://localhost:5000/api/food-reviews/restaurant/${id}/stats`);
+      const ratingsResponse = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/restaurant/${id}/stats`);
       if (ratingsResponse.ok) {
         const ratingsData = await ratingsResponse.json();
         setFoodRatings(ratingsData);
@@ -164,7 +164,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/foods/restaurant/${id}`);
+        const response = await fetch(`https://polybitesbackend.onrender.com/api/foods/restaurant/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch menu items');
         }
@@ -172,7 +172,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
         setMenuItems(data);
         
         // Fetch all food ratings for this restaurant in one call
-        const ratingsResponse = await fetch(`http://localhost:5000/api/food-reviews/restaurant/${id}/stats`);
+        const ratingsResponse = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/restaurant/${id}/stats`);
         if (ratingsResponse.ok) {
           const ratingsData = await ratingsResponse.json();
           setFoodRatings(ratingsData);

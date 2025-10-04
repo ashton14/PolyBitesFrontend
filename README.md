@@ -26,4 +26,4 @@ IMPORTANT: Make sure that you add a .gitignore file and paste the following insi
 ## Running the backend:
 cd into polybites-backend
 run: npm start 
-Go to: http://localhost:5000/api/restaurants
+Go to: https://polybitesbackend.onrender.com/api/restaurants

@@ -64,7 +64,7 @@ export default function ProfilePage() {
 
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/profiles/auth/${user.id}`);
+        const response = await fetch(`https://polybitesbackend.onrender.com/api/profiles/auth/${user.id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch profile');
         }
@@ -96,7 +96,7 @@ export default function ProfilePage() {
     
     setReviewsLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/food-reviews/user/${user.id}`);
+      const response = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/user/${user.id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch reviews');
       }
@@ -130,7 +130,7 @@ export default function ProfilePage() {
         name: formData.name
       };
 
-      const response = await fetch(`http://localhost:5000/api/profiles/auth/${user.id}`, {
+      const response = await fetch(`https://polybitesbackend.onrender.com/api/profiles/auth/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -177,7 +177,7 @@ export default function ProfilePage() {
 
     try {
       console.log('Attempting to delete account for user:', user.id);
-      const response = await fetch(`http://localhost:5000/api/profiles/auth/${user.id}`, {
+      const response = await fetch(`https://polybitesbackend.onrender.com/api/profiles/auth/${user.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -282,7 +282,7 @@ export default function ProfilePage() {
                 }
                 try {
                   const requestBody = { name: formData.name };
-                  const response = await fetch(`http://localhost:5000/api/profiles/auth/${user.id}`, {
+                  const response = await fetch(`https://polybitesbackend.onrender.com/api/profiles/auth/${user.id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestBody),

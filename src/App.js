@@ -528,7 +528,7 @@ export default function App() {
 
   const fetchRestaurants = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/restaurants');
+      const response = await fetch('https://polybitesbackend.onrender.com/api/restaurants');
       if (!response.ok) {
         throw new Error('Failed to fetch restaurants');
       }
