@@ -51,7 +51,7 @@ export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
       
       if (user) {
         // Fetch the profile to get the user_id from the profiles table
-        const profileResponse = await fetch(`https://polybitesbackend.onrender.com/api/profiles/auth/${user.id}`);
+        const profileResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${user.id}`);
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
           userId = profileData.id;
@@ -59,7 +59,7 @@ export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
       }
       
       // Send the message to the backend
-      const response = await fetch('https://polybitesbackend.onrender.com/api/messages', {
+      const response = await fetch('https://polybitesbackend-production.up.railway.app/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

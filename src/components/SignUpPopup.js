@@ -31,7 +31,7 @@ export default function SignUpPopup({ isOpen, onClose, onSwitchToSignIn }) {
 
   const checkUserExists = async (email) => {
     try {
-      const response = await fetch(`https://polybitesbackend.onrender.com/api/profiles/check-user?email=${encodeURIComponent(email)}`);
+      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/check-user?email=${encodeURIComponent(email)}`);
       
       if (response.ok) {
         const data = await response.json();
@@ -51,7 +51,7 @@ export default function SignUpPopup({ isOpen, onClose, onSwitchToSignIn }) {
       // Add a small delay to ensure the auth user is properly created
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const response = await fetch('https://polybitesbackend.onrender.com/api/profiles', {
+      const response = await fetch('https://polybitesbackend-production.up.railway.app/api/profiles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

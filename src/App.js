@@ -234,28 +234,28 @@ function HomePage({ restaurants, loading, error }) {
   return (
     <main>
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-green-600 to-green-500 text-white pt-5 pb-24 mb-20 relative overflow-hidden" style={{ height:  '65vh', minHeight: 400 }}>
+      <div className="bg-gradient-to-b from-green-600 to-green-500 text-white pt-4 pb-16 sm:pt-5 sm:pb-24 mb-16 sm:mb-20 relative overflow-hidden" style={{ height: '50vh', minHeight: 300 }}>
         {/* Opaque food image background */}
         <img
           src={require('./assets/images/food-back.jpg')}
           alt="Food background"
           className="absolute inset-0 w-full h-full object-cover opacity-85 pointer-events-none select-none"
-          style={{ zIndex: 0, minHeight: 600 }}
+          style={{ zIndex: 0, minHeight: 300 }}
           loading="lazy"
           decoding="async"
         />
         {/* Overlay for better blending */}
         <div className="absolute inset-0 bg-gradient-to-b from-green-700/80 to-green-500/80" style={{ zIndex: 1, paddingTop: 0}}></div>
         <div className="container mx-auto px-4 text-center relative z-10 flex flex-col justify-center items-center h-full" >
-          <h1 className="text-8xl text-black md:text-8xl font-extrabold mb-8 animate-fade-in" style={{marginTop: 35}}>
+          <h1 className="text-4xl sm:text-6xl md:text-8xl text-black font-extrabold mb-4 sm:mb-8 animate-fade-in" style={{marginTop: 20}}>
             PolyBites
           </h1>
-          <p className="text-4xl md:text-4xl text-green-100 mb-12 font-semibold">
+          <p className="text-lg sm:text-2xl md:text-4xl text-green-100 mb-6 sm:mb-12 font-semibold px-2">
             <span className={`block transition-all duration-700 ${subtitleVisible[0] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>Your Ratings.</span>
             <span className={`block transition-all duration-700 ${subtitleVisible[1] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>Your Reviews.</span>
             <span className={`block transition-all duration-700 ${subtitleVisible[2] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>Your Restaurants.</span>
           </p>
-          <div className="w-24 h-1 bg-white mx-auto rounded-full opacity-50"></div>
+          <div className="w-16 sm:w-24 h-1 bg-white mx-auto rounded-full opacity-50"></div>
         </div>
         {/* Wave SVG divider */}
         {/* <div
@@ -283,7 +283,7 @@ function HomePage({ restaurants, loading, error }) {
       </div>
 
       {/* Restaurants Section */}
-      <div className="container mx-auto px-4 -mt-44 pt-32 pb-4 rounded-t-lg z-20" style={{position: 'relative'}}>
+      <div className="container mx-auto px-4 -mt-32 sm:-mt-44 pt-24 sm:pt-32 pb-4 rounded-t-lg z-20" style={{position: 'relative'}}>
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-green-600 mb-4"></div>
@@ -297,26 +297,26 @@ function HomePage({ restaurants, loading, error }) {
           </div>
         ) : (
           <>
-            <div className="max-w-[1600px] mx-auto px-6">
+            <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
               <div className="flex flex-col space-y-4 mb-6">
-                <h2 className="text-2xl font-semibold text-gray-800">
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 text-center sm:text-left">
                   {hasSearched && displayedSearchTerm.trim() ? `Results for "${displayedSearchTerm}"` : 'All Restaurants'}
                 </h2>
                 
-                <div className="flex gap-4 items-center">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
                   <div className="flex-1 relative">
                     <input
                       type="text"
                       value={searchTerm}
                       onChange={handleSearch}
                       placeholder="Search restaurants..."
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm"
+                      className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm"
                     />
                     {searchTerm && (
                       <button
                         type="button"
                         onClick={clearSearch}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors p-1"
                         aria-label="Clear search"
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -326,19 +326,19 @@ function HomePage({ restaurants, loading, error }) {
                     )}
                   </div>
                   
-                  <div className="relative">
-                    <div className="flex items-center gap-2">
-                      <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
+                  <div className="relative w-full sm:w-auto">
+                    <div className="flex items-center gap-2 mb-2 sm:mb-0">
+                      <label className="text-sm font-medium text-gray-700 flex items-center gap-1 whitespace-nowrap">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M7 8h9m-9 4h6m-6 4h3" />
                         </svg>
                         Sort
                       </label>
-                      <div className="relative sort-dropdown mr-6">
+                      <div className="relative sort-dropdown flex-1 sm:mr-6">
                         <div className="relative">
                           <button
                             onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                            className={`flex items-center gap-2 px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white shadow-sm transition-all duration-200 ${
+                            className={`flex items-center gap-2 px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white shadow-sm transition-all duration-200 w-full sm:w-auto text-left ${
                               sortBy === 'none' 
                                 ? 'bg-gray-50' 
                                 : 'bg-white border-green-200'
@@ -415,7 +415,7 @@ function HomePage({ restaurants, loading, error }) {
                           
                           {/* Dropdown menu */}
                           {isSortDropdownOpen && (
-                            <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50 min-w-[200px]">
+                            <div className="absolute top-full left-0 right-0 sm:left-auto sm:right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50 sm:min-w-[200px]">
                               <div className="py-1">
                                 <button
                                   onClick={() => { handleSort('rating_desc'); setIsSortDropdownOpen(false); }}
@@ -500,7 +500,7 @@ function HomePage({ restaurants, loading, error }) {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 justify-items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pb-8 sm:pb-12 justify-items-center">
                 {filteredRestaurants.map((restaurant) => (
                   <Restaurant
                     key={restaurant.id}
@@ -528,7 +528,7 @@ export default function App() {
 
   const fetchRestaurants = async () => {
     try {
-      const response = await fetch('https://polybitesbackend.onrender.com/api/restaurants');
+      const response = await fetch('https://polybitesbackend-production.up.railway.app/api/restaurants');
       if (!response.ok) {
         throw new Error('Failed to fetch restaurants');
       }

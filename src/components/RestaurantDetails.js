@@ -151,7 +151,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
     
     // Also refresh food ratings for this restaurant
     try {
-      const ratingsResponse = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/restaurant/${id}/stats`);
+      const ratingsResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/restaurant/${id}/stats`);
       if (ratingsResponse.ok) {
         const ratingsData = await ratingsResponse.json();
         setFoodRatings(ratingsData);
@@ -164,7 +164,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch(`https://polybitesbackend.onrender.com/api/foods/restaurant/${id}`);
+        const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/foods/restaurant/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch menu items');
         }
@@ -172,7 +172,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
         setMenuItems(data);
         
         // Fetch all food ratings for this restaurant in one call
-        const ratingsResponse = await fetch(`https://polybitesbackend.onrender.com/api/food-reviews/restaurant/${id}/stats`);
+        const ratingsResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/restaurant/${id}/stats`);
         if (ratingsResponse.ok) {
           const ratingsData = await ratingsResponse.json();
           setFoodRatings(ratingsData);
@@ -290,65 +290,72 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   return (
     <div ref={pageRef} className="relative min-h-screen">
       {/* Fixed back button */}
-      <div className="fixed top-24 left-4 md:left-8 z-[60]">
+      <div className="fixed top-20 left-2 sm:left-4 md:left-8 z-[60]">
         <button
           onClick={() => navigate('/')}
-          className="px-6 py-2.5 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors flex items-center gap-2 shadow-lg"
+          className="px-3 py-2 sm:px-6 sm:py-2.5 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors flex items-center gap-1 sm:gap-2 shadow-lg text-sm sm:text-base"
         >
-          <span>←</span> Back to list
+          <span>←</span> 
+          <span className="hidden sm:inline">Back to list</span>
+          <span className="sm:hidden">Back</span>
         </button>
       </div>
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
           <img
             src={restaurant.image}
             alt={restaurant.name}
-            className="w-full h-72 object-cover"
+            className="w-full h-48 sm:h-60 md:h-72 object-cover"
           />
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-semibold text-gray-800">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
                   {restaurant.name}
                 </h2>
                 {restaurant.Location && (
-                  <span className="text-gray-500 text-xl md:text-3xl ml-2" style={{ whiteSpace: 'nowrap' }}>
+                  <span className="text-gray-500 text-lg sm:text-xl md:text-3xl" style={{ whiteSpace: 'nowrap' }}>
                     {restaurant.Location}
                   </span>
                 )}
               </div>
             </div>
-            <div className="flex items-center justify-between mb-10 text-lg font-medium" style={{ minHeight: '3.5rem' }}>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0 mb-6 sm:mb-10 text-base sm:text-lg font-medium">
               <span className="flex items-center gap-2">
-                <span style={{ color: getRatingColor(averageRating), fontSize: '2.5rem', fontWeight: 'bold', lineHeight: 1 }}>
+                <span style={{ color: getRatingColor(averageRating), fontSize: '2rem', fontWeight: 'bold', lineHeight: 1 }}>
                   {Number(averageRating).toFixed(1)}
                 </span>
-                <span className="flex items-center" style={{ fontSize: '2.2rem', height: '2.5rem' }}>{renderStars(averageRating)}</span>
+                <span className="flex items-center" style={{ fontSize: '1.8rem', height: '2rem' }}>{renderStars(averageRating)}</span>
               </span>
               {typeof restaurant.average_value === 'number' && restaurant.average_value > 0 && (
                 <div className="flex items-center gap-2">
                   <span 
-                    className="flex items-center gap-2 text-4xl font-bold" 
+                    className="flex items-center gap-1 sm:gap-2 text-2xl sm:text-3xl md:text-4xl font-bold" 
                   >
-                    <span className="text-gray">Avg Value</span>
-                    <img src={valueIcon} alt="value" className="w-9 h-9" />
+                    <span className="text-gray text-sm sm:text-base md:text-lg">Avg Value</span>
+                    <img src={valueIcon} alt="value" className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9" />
                     <span style={getValueTextColor(Math.trunc(restaurant.average_value * 100))}>
                       {Math.trunc(restaurant.average_value * 100)}
                     </span>
                   </span>
                   <div className="relative group">
                     <svg 
-                      className="w-6 h-6 text-gray-400 hover:text-gray-600 cursor-help" 
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 hover:text-gray-600 cursor-help" 
                       fill="currentColor" 
                       viewBox="0 0 24 24"
                     >
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
                     </svg>
-                    <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                      The value of an item is calculated by rating / price * 100.<br/>
-                      A higher value means more bang for your buck. 
-                      <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-3/4 mb-3 px-4 py-3 bg-gray-900 text-white text-sm rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 z-50 w-64 sm:w-auto sm:max-w-sm border border-gray-700">
+                      <div className="text-center sm:text-left">
+                        <div className="font-semibold text-white mb-2">Value Calculation</div>
+                        <div className="space-y-1">
+                          <div className="font-mono text-green-300 text-xs">Rating ÷ Price × 100</div>
+                          <div className="text-xs text-gray-300">Higher value = better deal</div>
+                        </div>
+                      </div>
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
                     </div>
                   </div>
                 </div>
@@ -360,23 +367,23 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
             ) : error ? (
               <div className="text-center text-red-600 py-8">Error: {error}</div>
             ) : menuItems.length > 0 ? (
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-8">
                 <div className="flex flex-col space-y-4 mb-6">
-                  <h3 className="text-xl font-semibold text-gray-800">Menu Items</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Menu Items</h3>
                   
-                  <div className="flex gap-4 items-center">
-                    <div className="relative sort-dropdown mr-6">
-                      <div className="flex items-center gap-2">
-                        <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+                    <div className="relative sort-dropdown w-full sm:w-auto">
+                      <div className="flex items-center gap-2 mb-2 sm:mb-0">
+                        <label className="text-sm font-medium text-gray-700 flex items-center gap-1 whitespace-nowrap">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M7 8h9m-9 4h6m-6 4h3" />
                           </svg>
                           Sort
                         </label>
-                        <div className="relative">
+                        <div className="relative flex-1">
                           <button
                             onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                            className={`flex items-center gap-3 px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white shadow-sm transition-all duration-200 ${
+                            className={`flex items-center gap-2 sm:gap-3 px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white shadow-sm transition-all duration-200 w-full sm:w-auto text-left ${
                               sortBy === 'none' 
                                 ? 'bg-gray-50' 
                                 : 'bg-white border-green-200'
@@ -449,7 +456,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
                           )}
                           {/* Dropdown menu */}
                           {isSortDropdownOpen && (
-                            <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50 min-w-[200px]">
+                            <div className="absolute top-full left-0 right-0 sm:left-auto sm:right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50 sm:min-w-[200px]">
                               <div className="py-1">
                                 <button
                                   onClick={() => { handleSort('rating_desc'); setIsSortDropdownOpen(false); }}
@@ -503,27 +510,27 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {sortedMenuItems.map((item) => {
                     const foodRating = foodRatings[item.id] || { review_count: 0, average_rating: 0 };
                     return (
                       <div
                         key={item.id}
                         onClick={() => setSelectedFood(item)}
-                        className="menu-item group cursor-pointer bg-gray-50 rounded-lg p-4 hover:bg-green-50 transition-colors"
+                        className="menu-item group cursor-pointer bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-green-50 transition-colors"
                       >
-                        <div className="relative h-48 mb-3 overflow-hidden rounded">
+                        <div className="relative h-40 sm:h-48 mb-3 overflow-hidden rounded">
                           <img
                             src={getFoodIcon(item.food_type)}
                             alt={item.name}
                             className="w-4/5 h-4/5 object-contain mx-auto my-auto group-hover:scale-105 transition-transform"
                           />
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                            <p className="text-white text-lg font-medium">${item.price}</p>
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 sm:p-3">
+                            <p className="text-white text-base sm:text-lg font-medium">${item.price}</p>
                           </div>
                           {/* Food Rating Badge - Gradient background based on rating */}
                           <div 
-                            className="absolute top-0 right-0 m-4 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1"
+                            className="absolute top-0 right-0 m-2 sm:m-4 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium flex items-center gap-1"
                             style={{ 
                               background: `linear-gradient(135deg, ${getRatingColor(foodRating.average_rating)}, ${getRatingColor(Math.max(0, foodRating.average_rating - 1))})`,
                               backdropFilter: 'blur(4px)',
@@ -531,27 +538,27 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
                             }}
                           >
                             {Number(foodRating.average_rating).toFixed(1)}
-                            <img src={fullStar} alt="star" className="w-4 h-4 inline" />
+                            <img src={fullStar} alt="star" className="w-3 h-3 sm:w-4 sm:h-4 inline" />
                           </div>
                           {/* Food Value Badge - Dark blue to cyan gradient */}
                           {typeof item.value === 'number' && item.value > 0 && (
                             <div 
-                              className="absolute bottom-0 right-0 m-4 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1"
+                              className="absolute bottom-0 right-0 m-2 sm:m-4 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium flex items-center gap-1"
                               style={getValueColor(Math.trunc(item.value * 100))}
                             >
-                              <img src={valueIcon} alt="value" className="w-4 h-4" />
+                              <img src={valueIcon} alt="value" className="w-3 h-3 sm:w-4 sm:h-4" />
                               {Math.trunc(item.value * 100)}
                             </div>
                           )}
                         </div>
-                        <h4 className="text-lg font-medium text-gray-800 mb-2">
+                        <h4 className="text-base sm:text-lg font-medium text-gray-800 mb-2 line-clamp-2">
                           {item.name}
                         </h4>
-                        <p className="text-gray-600 text-sm mb-3">
+                        <p className="text-gray-600 text-xs sm:text-sm mb-3 line-clamp-3">
                           {item.description}
                         </p>
                         {/* Review count display */}
-                        <div className="text-gray-500 text-sm">
+                        <div className="text-gray-500 text-xs sm:text-sm">
                           <strong>{foodRating.review_count}</strong> reviews
                         </div>
                       </div>
@@ -572,7 +579,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
           onRestaurantUpdate={refreshRestaurantData}
         />
       </div>
-      <footer className="text-center text-xs text-gray-400 py-4 bg-green-50 mt-8">
+      <footer className="text-center text-xs text-gray-400 py-4 bg-green-50 mt-6 sm:mt-8 px-4">
         <a href="https://www.flaticon.com/" title="default food icons" target="_blank" rel="noopener noreferrer">
           Default icons created by Freepik - Flaticon
         </a>
