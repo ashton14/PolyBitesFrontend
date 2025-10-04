@@ -1,0 +1,197 @@
+:root {
+  --primary-green: #4CAF50;
+  --light-green: #81C784;
+  --dark-green: #388E3C;
+  --background-light: #F5F8F5;
+  --text-dark: #2C3E2E;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.App {
+  text-align: center;
+  background-color: var(--background-light);
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.App-header {
+  background-color: white;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App-logo {
+  height: 40px;
+  pointer-events: none;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.search-bar {
+  background: white;
+  border: 1px solid var(--light-green);
+  border-radius: 25px;
+  padding: 0.8rem 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--light-green);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-green);
+}
+
+.button {
+  background-color: var(--primary-green);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--dark-green);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.review-list {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 1rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.review {
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.back-button {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Hero section hover effect */
+.hero-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

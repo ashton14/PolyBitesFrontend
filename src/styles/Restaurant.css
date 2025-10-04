@@ -1,0 +1,149 @@
+.restaurant-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin: 1rem 0;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-4px);
+}
+
+.restaurant-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.restaurant-info {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.restaurant-name {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.restaurant-description {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.restaurant-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.restaurant-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  background-color: var(--light-green);
+  color: var(--text-dark);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.restaurant-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: var(--background-light);
+  color: var(--primary-green);
+}
+
+.restaurant-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.restaurant-filters {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.filter-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background: var(--background-light);
+  border: 1px solid var(--light-green);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+  background: var(--primary-green);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .restaurant-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .restaurant-image {
+    height: 150px;
+  }
+}
+  

@@ -1,0 +1,261 @@
+id,name,price,description,restaurant_id
+100,Café Vanilla Frappuccino®,4.99,"Coffee with vanilla bean powder, blended with whole milk and ice. Topped with sweetened whipped cream.",13
+101,Café Vanilla Frappuccino® Blended Beverage (Grande),4.99,"We take Frappuccino® roast coffee and vanilla bean powder, combine them with milk and ice, topped with whipped cream. Tastes like happiness.",13
+102,Café Vanilla Frappuccino®,4.99,"Coffee with vanilla bean powder, blended with whole milk and ice. Topped with sweetened whipped cream.",13
+103,Tall Caramel Frappuccino®,4.99,"Coffee blended with caramel sauce, whole milk and ice. Topped with whipped cream and caramel sauce.",13
+104,Caramel Frappuccino® Blended Beverage (Grande),4.99,"Caramel syrup meets coffee, milk and ice for a rendezvous in the blender, while whipped cream and buttery caramel sauce layer the love on top. To change things up, try it affogato-style with a hot espresso shot poured right over the top.",13
+105,Venti Caramel Frappuccino®,4.99,"Coffee blended with caramel sauce, whole milk and ice. Topped with whipped cream and caramel sauce.",13
+106,Tall Coffee Frappuccino®,4.99,Coffee blended with milk and ice.,13
+107,Coffee Frappuccino® Blended Beverage (Grande),4.99,Coffee meets milk and ice in a blender for a rumble-and-tumble togetherness to create one of our most-beloved original Frappuccino® blended beverages.,13
+108,Venti Coffee Frappuccino®,4.99,Coffee blended with milk and ice.,13
+109,Double Chocolaty Chip Frappuccino®,4.99,"A creamy blend of rich mocha-flavored sauce, chocolaty chips, milk and ice. Topped with sweetened whipped cream and mocha drizzle.",13
+110,Double Chocolaty Chip Frappuccino® Blended Beverage (Grande),4.99,"Rich mocha-flavored sauce meets up with chocolaty chips, milk and ice for a blender bash. Top it off with sweetened whipped cream and mocha drizzle for a real party in your mouth.",13
+111,Double Chocolaty Chip Frappuccino®,4.99,"A creamy blend of rich mocha-flavored sauce, chocolaty chips, milk and ice. Topped with sweetened whipped cream and mocha drizzle.",13
+112,Espresso Frappuccino®,4.99,"Coffee with espresso, blended with milk and ice.",13
+113,Espresso Frappuccino® Blended Beverage (Grande),4.99,"Coffee is combined with a shot of espresso and milk, then blended with ice to give you a nice little jolt and lots of sipping joy.",13
+114,Espresso Frappuccino®,4.99,"Coffee with espresso, blended with milk and ice.",13
+115,Java Chip Frappuccino®,4.99,"Coffee with rich mocha-flavored sauce blended with milk, chocolaty chips and ice.  Topped with sweetened whipped cream and chocolate flavored drizzle.",13
+116,Java Chip Frappuccino® Blended Beverage (Grande),4.99,"We blend mocha sauce and Frappuccino® chips with coffee, milk and ice, then top it off with whipped cream and a mocha drizzle to bring you endless java joy.",13
+117,Java Chip Frappuccino®,4.99,"Coffee with rich mocha-flavored sauce blended with milk, chocolaty chips and ice.  Topped with sweetened whipped cream and chocolate flavored drizzle.",13
+118,Mocha Frappuccino®,4.99,Coffee with rich mocha flavored sauce blended with milk and ice. Topped with sweetened whipped cream.,13
+119,Mocha Frappuccino® Blended Beverage (Grande),4.99,"Mocha sauce, Frappuccino® Roast coffee, milk and ice all come together for a mocha flavor that'll leave you wanting more. To change things up, try it affogato-style with a hot espresso shot poured right over the top.",13
+120,Mocha Frappuccino®,4.99,Coffee with rich mocha flavored sauce blended with milk and ice. Topped with sweetened whipped cream.,13
+121,Peppermint Mocha Frappuccino®,4.99,"Coffee blended with flavored peppermint syrup, rich mocha sauce, milk and ice. Topped with sweetened whipped cream and dark chocolate curls.",13
+122,Peppermint Mocha Frappuccino® Blended Beverage (Grande),4.99,"A delectable blend of chocolate-pepperminty perfection in every cool sip—Frappuccino® Roast coffee, mocha sauce, peppermint-flavored syrup, milk and ice, topped with whipped cream and dark chocolate curls.",13
+123,Peppermint Mocha Frappuccino®,4.99,"Coffee blended with flavored peppermint syrup, rich mocha sauce, milk and ice. Topped with sweetened whipped cream and dark chocolate curls.",13
+124,Strawberries & Crème Frappuccino®,4.99,Strawberries and milk blended with ice and topped with a swirl of whipped cream.,13
+125,Strawberries Crème Frappuccino® Blended Beverage (Grande),4.99,"Summer's favorite berry is the star of this delicious Frappuccino® Blended Beverage—a blend of ice, milk and strawberry puree layered on top of a splash of strawberry puree and finished with vanilla whipped cream.",13
+126,Strawberries & Crème Frappuccino®,4.99,Strawberries and milk blended with ice and topped with a swirl of whipped cream.,13
+127,Vanilla Bean Crème Frappuccino®,4.99,"A rich and creamy blend of vanilla bean, milk, and ice. Topped with whipped cream.",13
+128,Vanilla Bean Crème Frappuccino® Blended Beverage,4.99,"This rich and creamy blend of vanilla bean, milk and ice topped with whipped cream takes va-va-vanilla flavor to another level. To change things up, try it affogato-style with a hot espresso shot poured right over the top.",13
+129,Vanilla Bean Crème Frappuccino®,4.99,"A rich and creamy blend of vanilla bean, milk, and ice. Topped with whipped cream.",13
+130,White Chocolate Mocha Frappuccino®,4.99,"Coffee and white chocolate flavored sauce, blended with milk and ice. Topped with sweetened whipped cream.",13
+131,White Chocolate Mocha Frappuccino® Blended Beverage (Grande),4.99,"White chocolate Frappuccino® Roast coffee, milk and ice get together for what might be the best thing that happens to you all day. Oh, and there's whipped cream on top.",13
+132,White Chocolate Mocha Frappuccino®,4.99,"Coffee and white chocolate flavored sauce, blended with milk and ice. Topped with sweetened whipped cream.",13
+133,Chai Crème Frappuccino®,4.99,"A creamy blend of spicy Teavana® chai, milk and ice. Topped with sweetened whipped cream and a dash of cinnamon.",13
+134,Chai Crème Frappuccino®,4.99,"A creamy blend of spicy Teavana® chai, milk and ice. Topped with sweetened whipped cream and a dash of cinnamon.",13
+135,Chai Crème Frappuccino®,4.99,"A creamy blend of spicy Teavana® chai, milk and ice. Topped with sweetened whipped cream and a dash of cinnamon.",13
+136,Green Tea Crème Frappuccino®,4.99,"A refreshing blend of sweetened matcha green tea, milk and ice. Topped with sweetened whipped cream.",13
+137,Green Tea Crème Frappuccino®,4.99,"A refreshing blend of sweetened matcha green tea, milk and ice. Topped with sweetened whipped cream.",13
+138,Green Tea Crème Frappuccino®,4.99,"A refreshing blend of sweetened matcha green tea, milk and ice. Topped with sweetened whipped cream.",13
+139,Caramel Ribbon Crunch Creme Frappuccino Blended Beverage (Grande),4.99,"Buttery caramel syrup is blended with milk and ice, then topped with a layer of dark caramel sauce, whipped cream, caramel drizzle and a crunchy caramel-sugar topping—oh-so-beautifully delicious.",13
+140,Banana Walnut & Pecan Loaf,4.99,"Bananas, walnuts and pecans mixed into a moist, nutty, classic banana bread. - VEGETARIAN",13
+141,Blueberry Scone,4.99,"Buttermilk scone with blueberries, crème fraîche and a hint of lemon zest. - VEGETARIAN",13
+142,Butter Croissant,4.99,"Classic butter croissant with soft, flaky layers and a golden-brown crust.  -VEGETARIAN",13
+143,Cheese Danish,4.99,"Flaky, butter croissant dough with soft, warm cheese in the center. - VEGETARIAN",13
+144,Chocolate Chunk Cookie,4.99,Chewy cookie loaded with premium chocolate chunks,13
+145,Chocolate Croissant,4.99,"Two generous pieces of chocolate wrapped in a butter croissant with soft, flaky layers and a golden-brown crust.  -VEGETARIAN",13
+146,Double Chocolate Brownie,4.99,Rich chocolate brownie with generous chunks of semisweet chocolate. - VEGETARIAN,13
+147,Iced Lemon Loaf,4.99,"Citrusy, buttery, moist lemon pound cake topped with a sweet icing. -VEGETARIAN",13
+148,Gluten-free Marshmallow Dream Bar,4.99,"A crispy, chewy marshmallow bar",13
+149,Old Fashioned Glazed Doughnut,4.99,Old-fashioned cake doughnut glazed with sweet icing. - VEGETARIAN,13
+150,Pumpkin & Pepita Loaf,4.99,Gently spiced pumpkin bread topped with crunchy pepitas. - VEGETARIAN,13
+151,Cinnamon Coffee Cake,4.99,"Buttery, moist, coffee cake swirled with a cinnamon-sugar blend and finished with a crunchy streusel topping.  -VEGETARIAN",13
+152,Blueberry Yogurt Muffin with Honey,4.99,"A buttery muffin with seasonal blueberries, yogurt and honey",13
+153,Petite Vanilla Bean Scone,4.99,"Moist, fluffy, petite scone made with real vanilla beans and vanilla extract.  -VEGETARIAN",13
+154,Pumpkin Cream Cheese Muffin,4.99,"New for fall--a moist, richly spiced pumpkin muffin",13
+155,Chocolate Cake Pop,4.99,"Chocolate cake mixed with chocolate butter cream, dipped in dark chocolate and topped with sugar sprinkles",13
+156,Ham & Cheese Croissant,4.99,"Hickory-smoked ham and melted Swiss cheese wrapped in a butter croissant with soft, flaky layers and a golden-brown crust.",13
+157,Blueberry Muffin,4.99,"Soft muffin with sweet, juicy blueberries and a hint of lemon, finished with a crunchy sugar topping.  -VEGETARIAN",13
+158,Everything Bagel with Cheese,4.99,"A New York style bagel topped with Asiago cheese, poppy and sesame seeds, onion and garlic.",13
+159,Birthday Cake Pop,4.99,"Bite-sized vanilla cake mixed with vanilla buttercream, dipped in pink chocolaty icing and topped with white sprinkles.  -VEGETARIAN",13
+160,Plain Bagel,4.99,"Classic soft, chewy and thick New York–style bagel. Available with cream cheese or butter. - VEGAN - VEGETARIAN",13
+161,"Spinach, Feta & Egg White Wrap",4.99,"Cage-free egg whites are combined with spinach, feta cheese and sun-dried tomato cream cheese inside a whole-wheat wrap. - VEGETARIAN",13
+162,Classic Rolled & Steel-Cut Oatmeal,4.99,"A blend of rolled and whole-grain steel-cut oats topped with raisins, dried cranberries, sliced almonds, pecans, walnuts and brown sugar. Customize toppings any way you like. - VEGETARIAN",13
+163,Reduced-Fat Turkey Bacon & Cage Free Egg White Breakfast Sandwich,4.99,"Sizzling reduced-fat turkey bacon and wholesome cage-free egg whites are paired with the rich creaminess of melted, reduced-fat white cheddar cheese on an organic wheat English muffin.",13
+164,"Sausage, Cheddar & Egg Sandwich",4.99,"A savory sausage patty, fluffy cage-free eggs and aged Cheddar cheese on a perfectly toasted English muffin.",13
+165,"Double-Smoked Bacon, Cheddar & Egg Sandwich",4.99,"Bacon smoked for six hours over hickory wood chips, stacked with a cage-free fried egg, topped with a melted slice of sharp Cheddar cheese—all on our signature croissant bun.",13
+166,Hearty Blueberry Oatmeal,4.99,A blend of rolled and steel-cut oats with blueberries and agave syrup.,13
+167,Egg White & Roasted Red Pepper Egg Bites,4.99,"Cage-free egg whites combined with Monterey Jack cheese, spinach and fire-roasted red peppers and cooked using the French ""sous vide"" technique to create a velvety texture that's full of flavor.  -VEGETARIAN",13
+168,Bacon & Gruyère Egg Bites,4.99,"Applewood-smoked bacon and aged Gruyère Monterey Jack cheeses folded into cage-free eggs and cooked using the French ""sous vide"" technique to create a velvety texture that's full of flavor.",13
+169,"Bacon, Gouda, & Egg Breakfast Sandwich",4.99,"Sizzling applewood-smoked bacon, melty aged Gouda and a Parmesan frittata layered on an artisan roll for extra-smoky breakfast goodness.",13
+170,Avocado Spread,4.99,"Avocadoes mixed with lime, sea salt, garlic and a touch of spice—specially packaged to maintain freshness without the use of heat, additives or preservatives.",13
+171,"Turkey Bacon, Cheddar & Egg White Sandwich",4.99,"Sizzling turkey bacon and cage-free egg whites paired with creamy, melted, reduced-fat white Cheddar cheese on a wheat English muffin.",13
+172,"Bacon, Sausage & Egg Wrap",4.99,"Double-smoked bacon, savory pork sausage and cage-free scrambled eggs combined with Cheddar cheese and potatoes--all wrapped in a flour tortilla.",13
+173,Impossible™ Breakfast Sandwich,4.99,The savory Impossible™ Sausage Made from Plants combined with a cage-free fried egg and aged Cheddar cheese on an artisan sesame ciabatta bun. - VEGETARIAN,13
+174,Featured Dark Roast (Short),4.99,"One of our rich flavorful brewed coffees, selected to showcase our roasting and blending artistry",13
+175,Featured Dark Roast (Tall),4.99,"One of our rich flavorful brewed coffees, selected to showcase our roasting and blending artistry",13
+176,Featured Dark Roast (Grande),4.99,"One of our rich flavorful brewed coffees, selected to showcase our roasting and blending artistry",13
+177,Featured Dark Roast (Venti),4.99,"One of our rich flavorful brewed coffees, selected to showcase our roasting and blending artistry",13
+178,Caffé Misto (Short),4.99,Brewed coffee and steamed 2% milk,13
+179,Caffé Misto (Tall),4.99,Brewed coffee and steamed 2% milk,13
+180,Caffé Misto (Grande),4.99,A one-to-one combination of fresh-brewed coffee and steamed milk add up to one distinctly delicious coffee drink remarkably mixed.,13
+181,Caffé Misto (Venti),4.99,Brewed coffee and steamed 2% milk,13
+182,Iced Coffee (Tall),4.99,Freshly brewed Starbucks Iced Coffee Blend served chilled and slightly sweetened on ice,13
+183,Iced Coffee (Grande),4.99,Freshly brewed Starbucks Iced Coffee Blend served chilled and slightly sweetened on ice,13
+184,Iced Coffee (Venti),4.99,Freshly brewed Starbucks Iced Coffee Blend served chilled and slightly sweetened on ice,13
+185,Iced Coffee (Tranta),4.99,Freshly brewed Starbucks Iced Coffee Blend served chilled and slightly sweetened on ice,13
+186,Pike Place Roast (Short),4.99,A smooth balanced brew from a specialty roast of blended coffees,13
+187,Pike Place Roast (Tall),4.99,A smooth balanced brew from a specialty roast of blended coffees,13
+188,Pike Place Roast (Grande),4.99,A smooth balanced brew from a specialty roast of blended coffees,13
+189,Pike Place Roast (Venti),4.99,A smooth balanced brew from a specialty roast of blended coffees,13
+190,Cold Brew Coffee Grande,4.99,"Handcrafted in small batches daily, slow-steeped in cool water for 20 hours, without touching heat—Starbucks® Cold Brew is made from our custom blend of beans grown to steep long and cold for a super-smooth flavor.",13
+191,Caramel Apple Spice,4.99,"Steamed apple juice complemented with cinnamon syrup, whipped cream and a caramel sauce drizzle.",13
+192,Hot Chocolate,4.99,"Steamed 2% milk with vanilla and mocha flavored syrups, topped with sweetened whipped cream and chocolate flavored drizzle",13
+193,Hot Chocolate,4.99,"Steamed 2% milk with vanilla and mocha flavored syrups, topped with sweetened whipped cream and chocolate flavored drizzle",13
+194,Hot Chocolate,4.99,"Steamed 2% milk with vanilla and mocha flavored syrups, topped with sweetened whipped cream and chocolate flavored drizzle",13
+195,Hot Chocolate,4.99,"Steamed 2% milk with vanilla and mocha flavored syrups, topped with sweetened whipped cream and chocolate flavored drizzle",13
+196,Peppermint Hot Chocolate,4.99,"Steamed 2% milk with peppermint, mocha and vanilla flavored syrups, sweetened whipped cream and dark chocolate curls",13
+197,Peppermint Hot Chocolate,4.99,"Steamed 2% milk with peppermint, mocha and vanilla flavored syrups, sweetened whipped cream and dark chocolate curls",13
+198,Peppermint Hot Chocolate (Grande),4.99,"A big welcome back to our classic holiday hot chocolate—lovingly made with chocolaty mocha sauce, peppermint-flavored syrup and steamed milk and sweetly topped with whipped cream and dark chocolate curls.",13
+199,Peppermint Hot Chocolate,4.99,"Steamed 2% milk with peppermint, mocha and vanilla flavored syrups, sweetened whipped cream and dark chocolate curls",13
+200,White Hot Chocolate,4.99,A traditional hot chocolate beverage made with white chocolate and steamed milk topped with whipped cream,13
+201,White Hot Chocolate,4.99,A traditional hot chocolate beverage made with white chocolate and steamed milk topped with whipped cream,13
+202,White Hot Chocolate (Grande),4.99,"A traditional hot chocolate beverage made with white chocolate sauce and steamed milk, topped with whipped cream.",13
+203,White Hot Chocolate,4.99,A traditional hot chocolate beverage made with white chocolate and steamed milk topped with whipped cream,13
+204,Peppermint White Hot Chocolate (Grande),4.99,"A sweet twist on holiday hot chocolate—white chocolate mocha sauce, peppermint-flavored syrup and steamed milk, topped with whipped cream and dark chocolate curls.",13
+205,Caffe Americano,4.99,"Rich, full bodied espresso with hot water in true European style",13
+206,Caffe Americano,4.99,"Rich, full bodied espresso with hot water in true European style",13
+207,Caffe Americano (Grande),4.99,Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance.,13
+208,Caffe Americano,4.99,"Rich, full bodied espresso with hot water in true European style",13
+209,Caffe Latte,4.99,"Rich, full bodied espresso in 2% steamed milk, lightly topped with foam",13
+210,Caffe Latte (Grande),4.99,"Our dark, rich espresso balanced with steamed milk and a light layer of foam. A perfect milk-forward warm-up.",13
+211,Caffe Latte,4.99,"Rich, full bodied espresso in 2% steamed milk, lightly topped with foam",13
+212,Caffe Mocha,4.99,"Espresso with bittersweet mocha sauce and steamed 2% milk, topped with sweetened whipped cream",13
+213,Caffe Mocha (Grande),4.99,"Our rich, full-bodied espresso combined with bittersweet mocha sauce and steamed milk, then topped with sweetened whipped cream. The classic coffee drink that always sweetly satisfies.",13
+214,Caffe Mocha,4.99,"Espresso with bittersweet mocha sauce and steamed 2% milk, topped with sweetened whipped cream",13
+215,Cappuccino,4.99,"Espresso with steamed 2% milk, topped with a deep layer of foam",13
+216,Cappuccino,4.99,"Espresso with steamed 2% milk, topped with a deep layer of foam",13
+217,Cappuccino (Grande),4.99,"Dark, rich espresso lies in wait under a smoothed and stretched layer of thick milk foam. An alchemy of barista artistry and craft.",13
+218,Cappuccino,4.99,"Espresso with steamed 2% milk, topped with a deep layer of foam",13
+219,Caramel Macchiato,4.99,"Freshly steamed milk with vanilla flavored syrup, marked with espresso and finished with caramel sauce",13
+220,Caramel Macchiato (Grande),4.99,"Freshly steamed milk with vanilla flavored syrup, marked with espresso and finished with caramel sauce",13
+221,Caramel Macchiato,4.99,"Freshly steamed milk with vanilla flavored syrup, marked with espresso and finished with caramel sauce",13
+222,Cinnamon Dolce Latte,4.99,Espresso with steamed milk and cinnamon dolce flavored syrup. Topped with sweetened whipped cream and cinnamon dolce topping.,13
+223,Cinnamon Dolce Latte (Grande),4.99,"We add freshly steamed milk and cinnamon dolce-flavored syrup to our classic espresso, topped with sweetened whipped cream and a cinnamon dolce topping to bring you specialness in a treat.",13
+224,Cinnamon Dolce Latte,4.99,Espresso with steamed milk and cinnamon dolce flavored syrup. Topped with sweetened whipped cream and cinnamon dolce topping.,13
+225,Espresso,4.99,Made with our own espresso roast.,13
+226,Espresso,4.99,Made with our own espresso roast.,13
+227,Espresso Con Panna,4.99,Espresso topped with whipped cream,13
+228,Espresso Macchiato,4.99,Our rich espresso marked with dollop of steamed milk and foam. A European-style classic.,13
+229,Espresso Macchiato Doppio,4.99,Our rich espresso marked with dollop of steamed milk and foam. A European-style classic.,13
+230,Flavored Latte,4.99,Espresso and steamed milk flavored with syrup,13
+231,Flavored Latte,4.99,Espresso and steamed milk flavored with syrup,13
+232,Flavored Latte,4.99,Espresso and steamed milk flavored with syrup,13
+233,Flavored Latte,4.99,Espresso and steamed milk flavored with syrup,13
+234,Iced Caffe Americano,4.99,"Rich, full bodied espresso combined with water and chilled with ice",13
+235,Iced Caffe Americano (Grande),4.99,"Espresso shots topped with cold water produce a light layer of crema, then served over ice. The result: a wonderfully rich cup with depth and nuance. Pro Tip: For an additional boost, ask your barista to try this with an extra shot.",13
+236,Iced Caffe Americano,4.99,"Rich, full bodied espresso combined with water and chilled with ice",13
+237,Iced Caffe Latte,4.99,Full-bodied espresso plus cold 2% milk and poured over ice,13
+238,Iced Caffe Latte (Grande),4.99,"Our dark, rich espresso combined with milk and served over ice. A perfect milk-forward cooldown.",13
+239,Iced Caffe Latte,4.99,Full-bodied espresso plus cold 2% milk and poured over ice,13
+240,Iced Caffe Mocha,4.99,Espresso combined with bittersweet mocha sauce and 2% milk over ice.  Topped with sweetened whipped cream.,13
+241,Iced Caffe Mocha (Grande),4.99,"Our rich, full-bodied espresso combined with bittersweet mocha sauce, milk and ice, then topped with sweetened whipped cream. The classic iced coffee drink that always sweetly satisfies.",13
+242,Iced Caffe Mocha,4.99,Espresso combined with bittersweet mocha sauce and 2% milk over ice.  Topped with sweetened whipped cream.,13
+243,Iced Caramel Macchiato,4.99,"Espresso combined with vanilla flavored syrup, milk and caramel sauce over ice.",13
+244,Iced Caramel Macchiato (Grande),4.99,"We combine our rich, full-bodied espresso with vanilla-flavored syrup, milk and ice, then top it off with a caramel drizzle for an oh-so-sweet finish.",13
+245,Iced Caramel Macchiato,4.99,"Espresso combined with vanilla flavored syrup, milk and caramel sauce over ice.",13
+246,Iced Cinnamon Dolce Latte,4.99,"Espresso, 2% milk and cinnamon dolce flavored syrup served over ice.  Topped with sweetened whipped cream and cinnamon dolce sprinkles.",13
+247,Iced Cinnamon Dolce Latte,4.99,"Espresso, 2% milk and cinnamon dolce flavored syrup served over ice.  Topped with sweetened whipped cream and cinnamon dolce sprinkles.",13
+248,Iced Cinnamon Dolce Latte,4.99,"Espresso, 2% milk and cinnamon dolce flavored syrup served over ice.  Topped with sweetened whipped cream and cinnamon dolce sprinkles.",13
+249,Iced Flavored Latte,4.99,"Full bodied espresso with cold 2% milk and your choice of syrup, poured over ice.",13
+250,Iced Flavored Latte,4.99,"Full bodied espresso with cold 2% milk and your choice of syrup, poured over ice.",13
+251,Iced Flavored Latte,4.99,"Full bodied espresso with cold 2% milk and your choice of syrup, poured over ice.",13
+252,Iced Peppermint Mocha,4.99,"Espresso, 2% milk, mocha-flavored sauce and peppermine flavored syrup over ice. Topped with sweetened whipped cream and chocolate curls.",13
+253,Iced Peppermint Mocha,4.99,"Espresso, 2% milk, mocha-flavored sauce and peppermine flavored syrup over ice. Topped with sweetened whipped cream and chocolate curls.",13
+254,Iced Peppermint Mocha,4.99,"Espresso, 2% milk, mocha-flavored sauce and peppermine flavored syrup over ice. Topped with sweetened whipped cream and chocolate curls.",13
+255,Iced Peppermint White Chocolate Mocha,4.99,"Espresso, 2% milk, white chocolate flavored sauce and peppermint flavored syrup on ice. Topped with sweetened whipped cream.",13
+256,Iced Peppermint White Chocolate Mocha (Grande),4.99,"Our signature espresso meets a trio of white chocolate sauce, peppermint-flavored syrup and milk, served over ice and topped with whipped cream and dark chocolate curls—a sweet, oh-so-delightfully merry treat.",13
+257,Iced Peppermint White Chocolate Mocha,4.99,"Espresso, 2% milk, white chocolate flavored sauce and peppermint flavored syrup on ice. Topped with sweetened whipped cream.",13
+258,Iced Skinny Flavored Latte,4.99,"Rich, full-bodied espresso, nonfat milk and a sugar free flavored syrup on ice.",13
+259,Iced Skinny Flavored Latte,4.99,"Rich, full-bodied espresso, nonfat milk and a sugar free flavored syrup on ice.",13
+260,Iced Skinny Flavored Latte,4.99,"Rich, full-bodied espresso, nonfat milk and a sugar free flavored syrup on ice.",13
+261,Iced White Chocolate Mocha,4.99,"Espresso, 2% milk and white chocolate flavored sauce poured over ice.  Topped with sweetened whipped cream.",13
+262,Iced White Chocolate Mocha (Grande),4.99,"Our signature espresso meets white chocolate sauce, milk and ice, and then is finished off with sweetened whipped cream to create this supreme white chocolate delight.",13
+263,Iced White Chocolate Mocha,4.99,"Espresso, 2% milk and white chocolate flavored sauce poured over ice.  Topped with sweetened whipped cream.",13
+264,Peppermint Mocha,4.99,"Espresso, steamed 2% milk, mocha sauce and peppermint flavored syrup topped with sweetened whipped cream and dark chocolate curls.",13
+265,Peppermint Mocha,4.99,"Espresso, steamed 2% milk, mocha sauce and peppermint flavored syrup topped with sweetened whipped cream and dark chocolate curls.",13
+266,Peppermint Mocha,4.99,"Espresso, steamed 2% milk, mocha sauce and peppermint flavored syrup topped with sweetened whipped cream and dark chocolate curls.",13
+267,Peppermint White Chocolate Mocha,4.99,Espresso with white chocolate and peppermint flavored syrups and steamed 2% milk.  Topped with sweetened whipped cream and dark chocolate curls.,13
+268,Peppermint White Chocolate Mocha (Grande),4.99,"Rich espresso meets a trio of white chocolate sauce, peppermint-flavored syrup and steamed milk, topped with sweet whipped cream and dark chocolate curls—an oh-so-delightfully merry treat.",13
+269,Peppermint White Chocolate Mocha,4.99,Espresso with white chocolate and peppermint flavored syrups and steamed 2% milk.  Topped with sweetened whipped cream and dark chocolate curls.,13
+270,Skinny Caramel Macchiato,4.99,"A lighter version of our rich and creamy handcrafted classic, made with non fat milk.",13
+271,Skinny Caramel Macchiato,4.99,"A lighter version of our rich and creamy handcrafted classic, made with non fat milk.",13
+272,Skinny Caramel Macchiato,4.99,"A lighter version of our rich and creamy handcrafted classic, made with non fat milk.",13
+273,White Chocolate Mocha,4.99,Espresso with white chocolate flavored sauce and steamed milk.  Topped with sweetened whipped cream.,13
+274,White Chocolate Mocha (Grande),4.99,"Our signature espresso meets white chocolate sauce and steamed milk, and then is finished off with sweetened whipped cream to create this supreme white chocolate delight.",13
+275,White Chocolate Mocha,4.99,Espresso with white chocolate flavored sauce and steamed milk.  Topped with sweetened whipped cream.,13
+276,Steamed Apple Juice (Kids),4.99,Freshly steamed 100% apple juice (not from concentrate). Feel the apple goodness in this classic fruit drink that will soothe and embolden your day.,13
+277,Flat White,4.99,"Smooth ristretto shots of espresso get the perfect amount of steamed whole milk to create a not-too-strong, not-too-creamy, just-right flavor.",13
+278,Iced Toasted Vanilla Oatmilk Shaken Espresso Grande,4.99,Starbucks® Blonde espresso combined with notes of caramelized vanilla shaken together and topped with oatmilk for an energizing treat to boost your day.,13
+279,Iced Toasted Vanilla Oatmilk Shaken Espresso Tall,4.99,Starbucks® Blonde espresso combined with notes of caramelized vanilla shaken together and topped with oatmilk for an energizing treat to boost your day.,13
+280,Iced Toasted Vanilla Oatmilk Shaken Espresso Venti,4.99,Starbucks® Blonde espresso combined with notes of caramelized vanilla shaken together and topped with oatmilk for an energizing treat to boost your day.,13
+281,Chocolate Cream Cold Brew Tall,4.99,"Starbucks® Cold Brew sweetened with vanilla syrup and topped with a silky, chocolaty cream cold foam.",13
+282,Chocolate Cream Cold Brew Grande,4.99,"Starbucks® Cold Brew sweetened with vanilla syrup and topped with a silky, chocolaty cream cold foam.",13
+283,Chocolate Cream Cold Brew Venti,4.99,"Starbucks® Cold Brew sweetened with vanilla syrup and topped with a silky, chocolaty cream cold foam.",13
+284,Chocolate Cream Cold Brew Trenta,4.99,"Starbucks® Cold Brew sweetened with vanilla syrup and topped with a silky, chocolaty cream cold foam.",13
+285,Honey Almondmilk Cold Brew Tall,4.99,Starbucks® Cold Brew lightly sweetened with honey and topped off with almondmilk for a balanced taste in every delicious sip.,13
+286,Honey Almondmilk Cold Brew Grande,4.99,Starbucks® Cold Brew lightly sweetened with honey and topped off with almondmilk for a balanced taste in every delicious sip.,13
+287,Honey Almondmilk Cold Brew Venti,4.99,Starbucks® Cold Brew lightly sweetened with honey and topped off with almondmilk for a balanced taste in every delicious sip.,13
+288,Honey Almondmilk Cold Brew Trenta,4.99,Starbucks® Cold Brew lightly sweetened with honey and topped off with almondmilk for a balanced taste in every delicious sip.,13
+289,Cold Brew with Salted Honey Cold Foam,4.99,Starbucks® Cold Brew topped with salted honey cold foam and a strike of toasted honey topping.,13
+290,Cold Brew with Salted Honey Cold Foam Grande,4.99,Starbucks® Cold Brew topped with salted honey cold foam and a strike of toasted honey topping.,13
+291,Salted Caramel Cream Cold Brew Grande,4.99,"Here's a savory-meets-sweet refreshing beverage certain to delight: our signature, super-smooth cold brew, sweetened with a touch of caramel and topped with a salted, rich cold foam.",13
+292,Vanilla Sweet Cream Cold Brew Grande,4.99,Our slow-steeped custom blend of Starbucks® Cold Brew coffee accented with vanilla and topped with a delicate float of house-made vanilla sweet cream that cascades throughout the cup. It's over-the-top and super-smooth.,13
+293,Iced Brown Sugar Oatmilk Shaken Espresso,4.99,"First we shake Starbucks® Blonde espresso, brown sugar and cinnamon together, and then top it off with oatmilk and ice for a cool lift to power you through your day.",13
+294,Almondmilk Honey Flat White Grande,4.99,"This flat white intentionally pairs almondmilk and signature espresso with a hint of honey, making a perfect amount of creamy, nutty sweetness.",13
+295,Honey Oatmilk Latte Grande,4.99,Oatmilk and signature espresso are intentionally combined with a hint of honey and a toasted honey topping—a savory tribute to all things sweet and salty.,13
+296,Iced Honey Oatmilk Latte Grande,4.99,Oatmilk and signature espresso are intentionally combined over ice with a hint of honey and a toasted honey topping—a savory tribute to all things sweet and salty.,13
+297,Iced Blonde Vanilla Latte (Grande),4.99,"Seriously smooth and subtly sweet Starbucks® Blonde Espresso, milk, ice and vanilla syrup come together to create a delightful twist on a beloved espresso classic.",13
+298,Iced Vanilla Latte (Grande),4.99,"Our dark, rich espresso combined with milk and 4 pumps of vanilla syrup. Served over ice. A perfect milk-forward cooldown.",13
+299,Espresso Triple,4.99,Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do.,13
+300,Espresso Quad,4.99,Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do.,13
+301,Espresso Con Panna Doppio,4.99,Espresso meets a dollop of whipped cream to enhance the rich and caramelly flavors of a straight-up shot.,13
+302,Espresso Con Panna Triple,4.99,Espresso meets a dollop of whipped cream to enhance the rich and caramelly flavors of a straight-up shot.,13
+303,Espresso Con Panna Quad,4.99,Espresso meets a dollop of whipped cream to enhance the rich and caramelly flavors of a straight-up shot.,13
+304,Espresso Macchiato Triple,4.99,Our rich espresso marked with dollop of steamed milk and foam. A European-style classic.,13
+305,Espresso Macchiato Quad,4.99,Our rich espresso marked with dollop of steamed milk and foam. A European-style classic.,13
+306,Iced Shaken Espresso (Grande),4.99,"Made with the rich, full-bodied espresso you love—then shaken, chilled and mellowed with sweetness and a touch of milk to create a delightfully and deliciously convenient on-the-go drink.",13
+307,Steamed Milk (Grande),4.99,"Enjoy a warm cup of skim, 2%, soy, almond or coconutmilk steamed for your sipping pleasure.",13
+308,Steamed Milk (Kids),4.99,"Enjoy a warm cup of skim, 2%, soy, almond or coconutmilk steamed for your sipping pleasure.",13
+309,Pumpkin Spice Creme (Grande),4.99,"We combine steamed milk with flavors of pumpkin, cinnamon, nutmeg and clove, then top it all off with whipped cream to create this amazing, coffee-free fall favorite.",13
+310,Iced Pumpkin Spice Latte (Grande),4.99,"Our signature espresso and milk—with the celebrated flavor combination of pumpkin, cinnamon, nutmeg and clove—served over ice. Enjoy it topped with whipped cream and real pumpkin-pie spices.",13
+311,Pumpkin Spice Latte (Grande),4.99,"Our signature espresso and steamed milk with the celebrated flavor combination of pumpkin, cinnamon, nutmeg and clove. Enjoy it topped with whipped cream and real pumpkin-pie spices.",13
+312,Tazo® Black Shaken Iced Tea,4.99,"Black tea with a hint of citrus fruit essence, lightly sweetened and hand-shaken with ice.",13
+313,Tazo® Black Shaken Iced Tea,4.99,"Black tea with a hint of citrus fruit essence, lightly sweetened and hand-shaken with ice.",13
+314,Tazo® Black Shaken Iced Tea (Grande),4.99,Premium black tea sweetened just right and shaken with ice to create an ideal iced tea—a rich and flavorful black tea journey awaits you.,13
+315,Tazo® Black Shaken Iced Tea,4.99,"Black tea with a hint of citrus fruit essence, lightly sweetened and hand-shaken with ice.",13
+316,Tazo® Black Shaken Iced Tea Lemonade,4.99,Fine black teas mixed with refreshing lemonade and lightly sweetened.,13
+317,Tazo® Black Shaken Iced Tea Lemonade (Grande),4.99,"Premium black tea sweetened just right, then shaken with refreshing lemonade and ice for this Arnold Palmer-inspired beverage. A distinguished, satisfying treat.",13
+318,Tazo® Black Shaken Iced Tea Lemonade,4.99,Fine black teas mixed with refreshing lemonade and lightly sweetened.,13
+319,Tazo® Black Shaken Iced Tea Lemonade,4.99,Fine black teas mixed with refreshing lemonade and lightly sweetened.,13
+320,Chai Tea Latte,4.99,"Black tea infused with cinnamon, clove and other warming spices is combined with steamed milk and topped with foam for the perfect balance of sweet and spicy. An iconic chai cup.",13
+321,Tazo® Earl Grey Brewed Tea,4.99,A traditional black tea scented with the essence of Bergamot.,13
+322,Tazo® Earl Grey Brewed Tea,4.99,A traditional black tea scented with the essence of Bergamot.,13
+323,Tazo® Earl Grey Brewed Tea,4.99,A traditional black tea scented with the essence of Bergamot.,13
+324,Tazo® Earl Grey Brewed Tea,4.99,A traditional black tea scented with the essence of Bergamot.,13
+325,Tazo® Full Leaf Chai Tea,4.99,A satisfyingly rich blend of black teas and exotic spices.,13
+326,Tazo® Full Leaf Chai Tea,4.99,A satisfyingly rich blend of black teas and exotic spices.,13
+327,Tazo® Full Leaf Chai Tea,4.99,A satisfyingly rich blend of black teas and exotic spices.,13
+328,Tazo® Full Leaf Chai Tea,4.99,A satisfyingly rich blend of black teas and exotic spices.,13
+329,Tazo® Iced Chai Tea Latte,4.99,"Black tea infused with cardamom, cinnamon, black pepper and star anise added to milk and ice.",13
+330,Iced Chai Tea Latte (Grande),4.99,"Black tea infused with cinnamon, clove, and other warming spices are combined with milk and ice for the perfect balance of sweet and spicy.",13
+331,Tazo® Iced Chai Tea Latte,4.99,"Black tea infused with cardamom, cinnamon, black pepper and star anise added to milk and ice.",13
+332,Tazo® Shaken Iced Green Tea,4.99,"Green tea with mint, lemongrass and lemon verbena, lightly sweetened and shaken with ice.",13
+333,Tazo® Shaken Iced Green Tea,4.99,"Green tea with mint, lemongrass and lemon verbena, lightly sweetened and shaken with ice.",13
+334,Tazo® Shaken Iced Green Tea,4.99,"Green tea with mint, lemongrass and lemon verbena, lightly sweetened and shaken with ice.",13
+335,Tazo® Shaken Iced Green Tea,4.99,"Green tea with mint, lemongrass and lemon verbena, lightly sweetened and shaken with ice.",13
+336,Tazo® Shaken Iced Green Tea Lemonade,4.99,"Green Tea and lemonade, lightly sweetened and hand-shaken with ice",13
+337,Tazo® Shaken Iced Green Tea Lemonade,4.99,"Green Tea and lemonade, lightly sweetened and hand-shaken with ice",13
+338,Tazo® Shaken Iced Green Tea Lemonade,4.99,"Green Tea and lemonade, lightly sweetened and hand-shaken with ice",13
+339,Tazo® Shaken Iced Green Tea Lemonade,4.99,"Green Tea and lemonade, lightly sweetened and hand-shaken with ice",13
+340,Tazo® Shaken Iced Passion Tea,4.99,"An infusion of hibiscus and natural tropical flavors, lightly sweetened and hand-shaken with ice.",13
+341,Tazo® Shaken Iced Passion Tea,4.99,"An infusion of hibiscus and natural tropical flavors, lightly sweetened and hand-shaken with ice.",13
+342,Tazo® Shaken Iced Passion Tea,4.99,"An infusion of hibiscus and natural tropical flavors, lightly sweetened and hand-shaken with ice.",13
+343,Tazo® Shaken Iced Passion Tea,4.99,"An infusion of hibiscus and natural tropical flavors, lightly sweetened and hand-shaken with ice.",13
+344,Tazo® Shaken Iced Passion Tea Lemonade,4.99,"An infusion of hibiscus and natural tropical flavors, mixed with lemonade and hand-shaken with ice.",13
+345,Tazo® Shaken Iced Passion Tea Lemonade,4.99,"An infusion of hibiscus and natural tropical flavors, mixed with lemonade and hand-shaken with ice.",13
+346,Tazo® Shaken Iced Passion Tea Lemonade,4.99,"An infusion of hibiscus and natural tropical flavors, mixed with lemonade and hand-shaken with ice.",13
+347,Tazo® Shaken Iced Passion Tea Lemonade,4.99,"An infusion of hibiscus and natural tropical flavors, mixed with lemonade and hand-shaken with ice.",13
+348,Jade Citrus Mint Green Tea (Grande),4.99,"Green tea, lemon verbena, lemongrass and a hint of spearmint mingle for a bright, refreshing, citrusy green tea experience.",13
+349,Iced Peach Green Tea (Grande),4.99,"Green tea is layered together with flavors of spearmint, lemon verbena and lemongrass for a taste that’s really peachy keen.",13
+350,Iced Peach Green Tea Lemonade (Grande),4.99,"Green tea is layered together with flavors of spearmint, lemon verbena, lemongrass and a splash of lemonade over ice for a patio-ready refreshment of surprise and delight.",13
+351,Iced Matcha Tea Latte (Grande),4.99,Smooth and creamy matcha sweetened just right and served with milk over ice. Green has never tasted so good.,13
+352,Matcha Tea Latte (Grande),4.99,Smooth and creamy matcha sweetened just right and served with steamed milk. This favorite will transport your senses to pure green delight.,13
+353,Tomato & Mozzarella on Focaccia,4.99,"Roasted tomatoes, mozzarella, spinach and basil pesto layered on toasted focaccia bread. - VEGETARIAN",13
+354,Turkey Pesto Panini,4.99,Sliced turkey and melty provolone cheese are stacked on our toasted focaccia roll and topped with fire-roasted peppers and basil pesto. It's a party in a panini.,13
+355,Crispy Grilled Cheese on Sourdough,4.99,"A blend of white Cheddar and mozzarella cheeses on sourdough bread, topped with a Parmesan butter spread. - VEGETARIAN",13
+356,Teavana Ice Tea Lemonade Trenta,4.99,Trenta,13
+357,Honey Citrus Mint Tea (Grande),4.99,"A customer creation so popular it’s now on the menu. Jade Citrus Mint® green tea, Peach Tranquility® herbal tea, hot water, steamed lemonade and a touch of honey mingle tastefully well together for a tea that comforts from the inside out.",13
+358,Iced Matcha Lemonade (Grande),4.99,"Our finely ground Teavana® matcha green tea combined with crisp lemonade, then shaken with ice, creates a refreshingly sweet, delicious drink and a delightfully vibrant, green hue.",13
+359,Teavana® London Fog Tea Latte (Grande),4.99,"Bright, citrusy spark of Italian bergamot blends with subtle hints of lavender, vanilla syrup, and steamed milk for this frothy reinvention of classic Earl Grey tea.",13
