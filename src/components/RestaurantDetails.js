@@ -22,6 +22,14 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   const pageRef = useRef(null);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
   
+  // Food search state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredMenuItems, setFilteredMenuItems] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [displayedSearchTerm, setDisplayedSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [searchLoading, setSearchLoading] = useState(false);
+  
   const restaurant = restaurants?.find(r => r.id === parseInt(id));
   const averageRating = restaurant?.average_rating || 0;
 
@@ -61,6 +69,54 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   useEffect(() => {
     localStorage.setItem('polybites-menu-sort-by', sortBy);
   }, [sortBy]);
+
+  // Debounce search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 150); // 150ms delay
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // Search food items when debounced search term changes
+  useEffect(() => {
+    const searchFoodItems = async () => {
+      if (debouncedSearchTerm.trim() === '') {
+        setFilteredMenuItems(menuItems);
+        setHasSearched(false);
+        setDisplayedSearchTerm('');
+        setSearchLoading(false);
+        return;
+      }
+
+      setSearchLoading(true);
+      try {
+        const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/foods/restaurant/${id}/search?q=${encodeURIComponent(debouncedSearchTerm)}`);
+        if (!response.ok) {
+          throw new Error('Failed to search food items');
+        }
+        const searchResults = await response.json();
+        setFilteredMenuItems(searchResults);
+        setHasSearched(true);
+        setDisplayedSearchTerm(debouncedSearchTerm);
+      } catch (err) {
+        console.error('Error searching food items:', err);
+        // Fallback to client-side filtering if API fails
+        const filtered = menuItems.filter(item =>
+          item.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+        );
+        setFilteredMenuItems(filtered);
+        setHasSearched(true);
+        setDisplayedSearchTerm(debouncedSearchTerm);
+      }
+      setSearchLoading(false);
+    };
+
+    if (id && menuItems.length > 0) {
+      searchFoodItems();
+    }
+  }, [debouncedSearchTerm, id, menuItems]);
 
   // Add click-away handler for sort dropdown
   useEffect(() => {
@@ -140,8 +196,8 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
 
   // Memoized sorted menu items
   const sortedMenuItems = useMemo(() => {
-    return sortMenuItems(menuItems, foodRatings, sortBy);
-  }, [menuItems, foodRatings, sortBy, sortMenuItems]);
+    return sortMenuItems(filteredMenuItems.length > 0 ? filteredMenuItems : menuItems, foodRatings, sortBy);
+  }, [filteredMenuItems, menuItems, foodRatings, sortBy, sortMenuItems]);
 
   // Function to refresh restaurant data
   const refreshRestaurantData = async () => {
@@ -369,9 +425,37 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
             ) : menuItems.length > 0 ? (
               <div className="mt-6 sm:mt-8">
                 <div className="flex flex-col space-y-4 mb-6">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Menu Items</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
+                    {hasSearched && displayedSearchTerm.trim() ? `Results for "${displayedSearchTerm}"` : 'Menu Items'}
+                  </h3>
                   
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+                    <div className="flex-1 relative">
+                      <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder="Search menu items..."
+                        className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm"
+                      />
+                      {searchTerm && (
+                        <button
+                          type="button"
+                          onClick={() => setSearchTerm('')}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors p-1"
+                          aria-label="Clear search"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      )}
+                      {searchLoading && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                          <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-green-600"></div>
+                        </div>
+                      )}
+                    </div>
                     <div className="relative sort-dropdown w-full sm:w-auto">
                       <div className="flex items-center gap-2 mb-2 sm:mb-0">
                         <label className="text-sm font-medium text-gray-700 flex items-center gap-1 whitespace-nowrap">
@@ -564,6 +648,11 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
                       </div>
                     );
                   })}
+                  {sortedMenuItems.length === 0 && hasSearched && (
+                    <div className="col-span-full text-center py-8 text-gray-500">
+                      No menu items found matching "{displayedSearchTerm}"
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
