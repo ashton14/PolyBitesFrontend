@@ -78,7 +78,7 @@ export default function SignInPopup({ isOpen, onClose, onSwitchToSignUp }) {
     setForgotStatus('');
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
-        redirectTo: window.location.origin + '/reset-password', 
+        redirectTo: 'https://poly-bites-frontend.vercel.app' + '/reset-password', 
       });
       if (error) {
         setForgotStatus('Error: ' + error.message);
