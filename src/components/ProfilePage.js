@@ -5,6 +5,7 @@ import { Filter } from 'bad-words';
 import fullStar from '../assets/stars/star.png';
 import halfStar from '../assets/stars/half_star.png';
 import emptyStar from '../assets/stars/empty_star.png';
+import { getApiUrl } from '../config';
 
 export default function ProfilePage() {
   const { user, logout } = useAuth();
@@ -64,7 +65,7 @@ export default function ProfilePage() {
 
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${user.id}`);
+        const response = await fetch(getApiUrl(`api/profiles/auth/${user.id}`));
         if (!response.ok) {
           throw new Error('Failed to fetch profile');
         }
@@ -96,7 +97,7 @@ export default function ProfilePage() {
     
     setReviewsLoading(true);
     try {
-      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/user/${user.id}`);
+      const response = await fetch(getApiUrl(`api/food-reviews/user/${user.id}`));
       if (!response.ok) {
         throw new Error('Failed to fetch reviews');
       }
@@ -130,7 +131,7 @@ export default function ProfilePage() {
         name: formData.name
       };
 
-      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${user.id}`, {
+      const response = await fetch(getApiUrl(`api/profiles/auth/${user.id}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -177,7 +178,7 @@ export default function ProfilePage() {
 
     try {
       console.log('Attempting to delete account for user:', user.id);
-      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${user.id}`, {
+      const response = await fetch(getApiUrl(`api/profiles/auth/${user.id}`), {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -282,7 +283,7 @@ export default function ProfilePage() {
                 }
                 try {
                   const requestBody = { name: formData.name };
-                  const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${user.id}`, {
+                  const response = await fetch(getApiUrl(`api/profiles/auth/${user.id}`), {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestBody),

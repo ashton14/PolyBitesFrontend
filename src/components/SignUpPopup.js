@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-import { Filter } from 'bad-words'
+import { Filter } from 'bad-words';
+import { getApiUrl } from '../config';
 
 export default function SignUpPopup({ isOpen, onClose, onSwitchToSignIn }) {
   const popupRef = useRef(null);
@@ -31,7 +32,7 @@ export default function SignUpPopup({ isOpen, onClose, onSwitchToSignIn }) {
 
   const checkUserExists = async (email) => {
     try {
-      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/check-user?email=${encodeURIComponent(email)}`);
+      const response = await fetch(getApiUrl(`api/profiles/check-user?email=${encodeURIComponent(email)}`));
       
       if (response.ok) {
         const data = await response.json();
@@ -51,7 +52,7 @@ export default function SignUpPopup({ isOpen, onClose, onSwitchToSignIn }) {
       // Add a small delay to ensure the auth user is properly created
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const response = await fetch('https://polybitesbackend-production.up.railway.app/api/profiles', {
+      const response = await fetch(getApiUrl('api/profiles'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

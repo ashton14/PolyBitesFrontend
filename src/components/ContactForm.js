@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import { getApiUrl } from '../config';
 
 export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
   const popupRef = useRef(null);
@@ -51,7 +52,7 @@ export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
       
       if (user) {
         // Fetch the profile to get the user_id from the profiles table
-        const profileResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${user.id}`);
+        const profileResponse = await fetch(getApiUrl(`api/profiles/auth/${user.id}`));
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
           userId = profileData.id;
@@ -59,7 +60,7 @@ export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
       }
       
       // Send the message to the backend
-      const response = await fetch('https://polybitesbackend-production.up.railway.app/api/messages', {
+      const response = await fetch(getApiUrl('api/messages'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

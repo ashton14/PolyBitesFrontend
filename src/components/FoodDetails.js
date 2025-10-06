@@ -6,6 +6,7 @@ import SignUpPopup from './SignUpPopup';
 import fullStar from '../assets/stars/star.png';
 import halfStar from '../assets/stars/half_star.png';
 import emptyStar from '../assets/stars/empty_star.png';
+import { getApiUrl } from '../config';
 
 const ANONYMOUS_NAMES = [
   "Anonymous Diner",
@@ -108,7 +109,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     }
 
     try {
-      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${userId}`);
+      const response = await fetch(getApiUrl(`api/profiles/auth/${userId}`));
       if (!response.ok) {
         throw new Error('Failed to fetch profile');
       }
@@ -171,8 +172,8 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
         setLikeLoading(new Set());
         
         const [reviewsResponse, statsResponse] = await Promise.all([
-          fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/food/${foodItem.id}`),
-          fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/food/${foodItem.id}/stats`)
+          fetch(getApiUrl(`api/food-reviews/food/${foodItem.id}`)),
+          fetch(getApiUrl(`api/food-reviews/food/${foodItem.id}/stats`))
         ]);
 
         if (!reviewsResponse.ok) {
@@ -201,7 +202,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
           // Batch fetch like counts for all reviews
           const likeCountsPromises = reviewsData.map(async (review) => {
             try {
-              const likeResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/${review.id}/likes`);
+              const likeResponse = await fetch(getApiUrl(`api/food-reviews/${review.id}/likes`));
               if (likeResponse.ok) {
                 const likeData = await likeResponse.json();
                 return { reviewId: review.id, count: likeData.likes || 0 };
@@ -224,7 +225,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
           if (user) {
             const userLikesPromises = reviewsData.map(async (review) => {
               try {
-                const likeResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/${review.id}/like/${user.id}`);
+                const likeResponse = await fetch(getApiUrl(`api/food-reviews/${review.id}/like/${user.id}`));
                 if (likeResponse.ok) {
                   const { exists } = await likeResponse.json();
                   return { reviewId: review.id, liked: exists };
@@ -271,7 +272,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     async function fetchOwnProfileName() {
       if (user && user.id && !userNames[user.id]) {
         try {
-          const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/profiles/auth/${user.id}`);
+          const response = await fetch(getApiUrl(`api/profiles/auth/${user.id}`));
           if (response.ok) {
             const profile = await response.json();
             console.log('Fetched profile for current user:', profile); // DEBUG
@@ -319,7 +320,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
 
   const handleSubmitReview = async (reviewData) => {
     try {
-      const response = await fetch('https://polybitesbackend-production.up.railway.app/api/food-reviews', {
+      const response = await fetch(getApiUrl('api/food-reviews'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -333,8 +334,8 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
 
       // Fetch updated reviews and stats
       const [updatedReviewsResponse, updatedStatsResponse] = await Promise.all([
-        fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/food/${foodItem.id}`),
-        fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/food/${foodItem.id}/stats`)
+        fetch(getApiUrl(`api/food-reviews/food/${foodItem.id}`)),
+        fetch(getApiUrl(`api/food-reviews/food/${foodItem.id}/stats`))
       ]);
 
       if (updatedReviewsResponse.ok && updatedStatsResponse.ok) {
@@ -399,7 +400,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     }
 
     try {
-      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/${reviewId}`, {
+      const response = await fetch(getApiUrl(`api/food-reviews/${reviewId}`), {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -416,8 +417,8 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
 
       // Fetch updated reviews and stats
       const [updatedReviewsResponse, updatedStatsResponse] = await Promise.all([
-        fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/food/${foodItem.id}`),
-        fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/food/${foodItem.id}/stats`)
+        fetch(getApiUrl(`api/food-reviews/food/${foodItem.id}`)),
+        fetch(getApiUrl(`api/food-reviews/food/${foodItem.id}/stats`))
       ]);
 
       if (updatedReviewsResponse.ok && updatedStatsResponse.ok) {
@@ -463,7 +464,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
       setLikeLoading(prev => new Set(prev).add(reviewId));
 
       // Call the toggle like API
-      const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/${reviewId}/toggle-like`, {
+      const response = await fetch(getApiUrl(`api/food-reviews/${reviewId}/toggle-like`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -664,8 +665,6 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
                 ) : reviews.length > 0 ? (
                   <div className="space-y-3">
                     {getSortedReviews().map((review) => {
-                      console.log('userNames:', userNames, 'review.user_id:', review.user_id);
-                      console.log('Rendering review:', review.user_id, 'userNames:', userNames, 'user.id:', user?.id);
                       return (
                         <div key={review.id} className="bg-gray-50 rounded-lg p-4">
                           <div className="flex items-center justify-between mb-2">

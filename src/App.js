@@ -16,6 +16,7 @@ import FAQsPage from './components/FAQsPage';
 import TermsPage from './components/TermsPage';
 import ResetPassword from './components/ResetPassword';
 import valueSortIcon from './assets/icons/value_sort.png';
+import { getApiUrl } from './config';
 
 
 function Layout({ children, isSignInOpen, setIsSignInOpen }) {
@@ -528,7 +529,7 @@ export default function App() {
 
   const fetchRestaurants = async () => {
     try {
-      const response = await fetch('https://polybitesbackend-production.up.railway.app/api/restaurants');
+      const response = await fetch(getApiUrl('api/restaurants'));
       if (!response.ok) {
         throw new Error('Failed to fetch restaurants');
       }

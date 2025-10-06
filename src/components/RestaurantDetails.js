@@ -6,6 +6,7 @@ import halfStar from '../assets/stars/half_star.png';
 import emptyStar from '../assets/stars/empty_star.png';
 import valueSortIcon from '../assets/icons/value_sort.png';
 import valueIcon from '../assets/icons/value.png';
+import { getApiUrl } from '../config';
 
 export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   const { id } = useParams();
@@ -92,7 +93,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
 
       setSearchLoading(true);
       try {
-        const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/foods/restaurant/${id}/search?q=${encodeURIComponent(debouncedSearchTerm)}`);
+        const response = await fetch(getApiUrl(`api/foods/restaurant/${id}/search?q=${encodeURIComponent(debouncedSearchTerm)}`));
         if (!response.ok) {
           throw new Error('Failed to search food items');
         }
@@ -207,7 +208,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
     
     // Also refresh food ratings for this restaurant
     try {
-      const ratingsResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/restaurant/${id}/stats`);
+      const ratingsResponse = await fetch(getApiUrl(`api/food-reviews/restaurant/${id}/stats`));
       if (ratingsResponse.ok) {
         const ratingsData = await ratingsResponse.json();
         setFoodRatings(ratingsData);
@@ -220,7 +221,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch(`https://polybitesbackend-production.up.railway.app/api/foods/restaurant/${id}`);
+        const response = await fetch(getApiUrl(`api/foods/restaurant/${id}`));
         if (!response.ok) {
           throw new Error('Failed to fetch menu items');
         }
@@ -228,7 +229,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
         setMenuItems(data);
         
         // Fetch all food ratings for this restaurant in one call
-        const ratingsResponse = await fetch(`https://polybitesbackend-production.up.railway.app/api/food-reviews/restaurant/${id}/stats`);
+        const ratingsResponse = await fetch(getApiUrl(`api/food-reviews/restaurant/${id}/stats`));
         if (ratingsResponse.ok) {
           const ratingsData = await ratingsResponse.json();
           setFoodRatings(ratingsData);

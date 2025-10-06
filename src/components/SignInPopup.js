@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import { FRONTEND_URL } from '../config';
 
 export default function SignInPopup({ isOpen, onClose, onSwitchToSignUp }) {
   const popupRef = useRef(null);
@@ -78,7 +79,7 @@ export default function SignInPopup({ isOpen, onClose, onSwitchToSignUp }) {
     setForgotStatus('');
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
-        redirectTo: 'https://poly-bites-frontend.vercel.app' + '/reset-password', 
+        redirectTo: `${FRONTEND_URL}/reset-password`, 
       });
       if (error) {
         setForgotStatus('Error: ' + error.message);
