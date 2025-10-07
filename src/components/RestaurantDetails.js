@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import FoodReview from './FoodDetails';
+import RestaurantReviews from './RestaurantReviews';
 import fullStar from '../assets/stars/star.png';
 import halfStar from '../assets/stars/half_star.png';
 import emptyStar from '../assets/stars/empty_star.png';
@@ -418,6 +419,12 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
                 </div>
               )}
             </div>
+
+            {/* General Restaurant Reviews Section */}
+            <RestaurantReviews 
+              restaurantId={id}
+              onReviewsUpdate={onRestaurantUpdate}
+            />
 
             {loading ? (
               <div className="text-center py-8">Loading menu items...</div>

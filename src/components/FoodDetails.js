@@ -525,8 +525,14 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     } else if (sortBy === 'recent') {
       // Sort by creation date (most recent first)
       sortedReviews.sort((a, b) => {
-        const dateA = new Date(a.created_at || 0);
-        const dateB = new Date(b.created_at || 0);
+        const dateA = new Date(a.created_at || a.createdAt || 0).getTime();
+        const dateB = new Date(b.created_at || b.createdAt || 0).getTime();
+        
+        // If dates are the same, sort by ID (higher ID = newer)
+        if (dateB === dateA) {
+          return b.id - a.id;
+        }
+        
         return dateB - dateA;
       });
     }
