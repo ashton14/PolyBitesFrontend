@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { getApiUrl } from '../config';
 
-export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
+export default function ContactForm({ isOpen, onClose, onSignInOpen, initialSubject = '' }) {
   const popupRef = useRef(null);
   const [formData, setFormData] = useState({
     subject: '',
@@ -28,7 +28,7 @@ export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
     };
   }, [isOpen, onClose]);
 
-  // Check authentication status when the form opens
+  // Check authentication status when the form opens and set initial subject
   useEffect(() => {
     const checkAuth = async () => {
       if (isOpen) {
@@ -36,10 +36,22 @@ export default function ContactForm({ isOpen, onClose, onSignInOpen }) {
         const { data: { user } } = await supabase.auth.getUser();
         setIsAuthenticated(!!user);
         setIsCheckingAuth(false);
+        
+        // Set initial subject if provided
+        if (initialSubject) {
+          setFormData(prev => ({
+            ...prev,
+            subject: initialSubject
+          }));
+        }
+      } else {
+        // Reset form when closing
+        setFormData({ subject: '', message: '' });
+        setIsSubmitted(false);
       }
     };
     checkAuth();
-  }, [isOpen]);
+  }, [isOpen, initialSubject]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import FoodReview from './FoodDetails';
 import RestaurantReviews from './RestaurantReviews';
+import ContactForm from './ContactForm';
 import fullStar from '../assets/stars/star.png';
 import halfStar from '../assets/stars/half_star.png';
 import emptyStar from '../assets/stars/empty_star.png';
@@ -23,6 +24,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   });
   const pageRef = useRef(null);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   
   // Food search state
   const [searchTerm, setSearchTerm] = useState('');
@@ -433,9 +435,17 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
             ) : menuItems.length > 0 ? (
               <div className="mt-6 sm:mt-8">
                 <div className="flex flex-col space-y-4 mb-6">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
-                    {hasSearched && displayedSearchTerm.trim() ? `Results for "${displayedSearchTerm}"` : 'Menu Items'}
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
+                      {hasSearched && displayedSearchTerm.trim() ? `Results for "${displayedSearchTerm}"` : 'Menu Items'}
+                    </h3>
+                    <button
+                      onClick={() => setIsContactFormOpen(true)}
+                      className="text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors font-medium border border-green-300 hover:border-green-400"
+                    >
+                      Something missing?
+                    </button>
+                  </div>
                   
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
                     <div className="flex-1 relative">
@@ -674,6 +684,13 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
           onClose={() => setSelectedFood(null)}
           foodItem={selectedFood}
           onRestaurantUpdate={refreshRestaurantData}
+        />
+        
+        <ContactForm
+          isOpen={isContactFormOpen}
+          onClose={() => setIsContactFormOpen(false)}
+          onSignInOpen={() => {}} // Not needed for this use case
+          initialSubject={`MISSING MENU ITEM - ${restaurant?.name || 'Restaurant'}`}
         />
       </div>
       <footer className="text-center text-xs text-gray-400 py-4 bg-green-50 mt-6 sm:mt-8 px-4">
