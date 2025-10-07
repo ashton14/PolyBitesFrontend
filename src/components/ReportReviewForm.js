@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { getApiUrl } from '../config';
+import { useAuth } from '../context/AuthContext';
+import SignInPopup from './SignInPopup';
+import SignUpPopup from './SignUpPopup';
 
 export default function ReportReviewForm({ 
   isOpen, 
@@ -8,10 +11,13 @@ export default function ReportReviewForm({
   reviewType, 
   onSuccess 
 }) {
+  const { user } = useAuth();
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const reportReasons = [
     'Inappropriate content',
@@ -22,8 +28,31 @@ export default function ReportReviewForm({
     'Other'
   ];
 
+  // Sign-in popup handlers
+  const handleCloseSignIn = () => {
+    setShowSignIn(false);
+  };
+
+  const handleCloseSignUp = () => {
+    setShowSignUp(false);
+  };
+
+  const handleSwitchToSignUp = () => {
+    setShowSignIn(false);
+    setShowSignUp(true);
+  };
+
+  const handleSwitchToSignIn = () => {
+    setShowSignUp(false);
+    setShowSignIn(true);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user?.id) {
+      setShowSignIn(true);
+      return;
+    }
     if (!reason) {
       setError('Please select a reason for reporting this review.');
       return;
@@ -44,7 +73,8 @@ export default function ReportReviewForm({
         },
         body: JSON.stringify({
           [reviewType === 'food' ? 'food_review_id' : 'general_review_id']: reviewId,
-          reason: reason
+          reason: reason,
+          user_id: user?.id
         })
       });
 
@@ -153,6 +183,19 @@ export default function ReportReviewForm({
           </div>
         </form>
       </div>
+
+      {/* SignIn/SignUp Popups */}
+      <SignInPopup 
+        isOpen={showSignIn} 
+        onClose={handleCloseSignIn}
+        onSwitchToSignUp={handleSwitchToSignUp}
+      />
+      
+      <SignUpPopup
+        isOpen={showSignUp}
+        onClose={handleCloseSignUp}
+        onSwitchToSignIn={handleSwitchToSignIn}
+      />
     </div>
   );
 }

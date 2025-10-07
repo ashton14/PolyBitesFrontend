@@ -177,7 +177,6 @@ export default function ProfilePage() {
     setError('');
 
     try {
-      console.log('Attempting to delete account for user:', user.id);
       const response = await fetch(getApiUrl(`api/profiles/auth/${user.id}`), {
         method: 'DELETE',
         headers: {
@@ -186,7 +185,6 @@ export default function ProfilePage() {
         body: JSON.stringify({ user_id: user.id }),
       });
 
-      console.log('Delete response status:', response.status);
       
       if (response.ok) {
         logout && logout();
@@ -229,9 +227,6 @@ export default function ProfilePage() {
     );
   }
 
-  // Debug: log profile
-  console.log('Profile object:', profile);
-
   return (
     <div className="min-h-screen bg-green-50">
       {/* Header */}
@@ -259,7 +254,6 @@ export default function ProfilePage() {
             {isEditing ? (
               <form onSubmit={async (e) => {
                 e.preventDefault();
-                console.log('Submitting form');
                 setError("");
                 if (profile?.name_change === 0) {
                   // Do nothing if not allowed
@@ -444,8 +438,6 @@ export default function ProfilePage() {
                   ) : (
                     <div className="space-y-4">
                       {userReviews.map((review) => {
-                        console.log('Review object:', review);
-                        console.log('getFoodIcon argument:', review.food_type);
                         return (
                           <div 
                             key={review.id} 

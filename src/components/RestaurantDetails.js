@@ -443,7 +443,7 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
                       onClick={() => setIsContactFormOpen(true)}
                       className="text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors font-medium border border-green-300 hover:border-green-400"
                     >
-                      Something missing?
+                      Something missing? Let us know!
                     </button>
                   </div>
                   

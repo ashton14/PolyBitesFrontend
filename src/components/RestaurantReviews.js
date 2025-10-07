@@ -35,6 +35,8 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 3;
   const [userNames, setUserNames] = useState({});
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -273,11 +275,19 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
         credentials: 'include'
       });
 
-      const responseData = await response.json();
-
       if (!response.ok) {
-        throw new Error(responseData.error || 'Failed to delete review');
+        let errorMessage = 'Failed to delete review';
+        try {
+          const responseData = await response.json();
+          errorMessage = responseData.error || responseData.message || errorMessage;
+        } catch (parseError) {
+          // If response is not JSON, use the status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
+
+      const responseData = await response.json();
 
       // Refresh reviews
       const [updatedReviewsResponse, updatedStatsResponse] = await Promise.all([
@@ -299,7 +309,21 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
       }
     } catch (error) {
       console.error('Error deleting review:', error);
-      alert(error.message || 'Failed to delete review. Please try again.');
+      console.error('Review ID:', reviewId);
+      console.error('User ID:', user?.id);
+      
+      let errorMessage = 'Failed to delete review. Please try again.';
+      if (error.message.includes('500')) {
+        errorMessage = 'Server error occurred. Please try again later or contact support.';
+      } else if (error.message.includes('403') || error.message.includes('401')) {
+        errorMessage = 'You are not authorized to delete this review.';
+      } else if (error.message.includes('404')) {
+        errorMessage = 'Review not found. It may have already been deleted.';
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      alert(errorMessage);
     }
   };
 
@@ -361,10 +385,6 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
     setShowReportForm(true);
   };
 
-  const handleReportSuccess = () => {
-    // Could show a success message or refresh data
-    console.log('Review reported successfully');
-  };
 
   const renderStars = (rating) => {
     const stars = [];
@@ -410,6 +430,33 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
     
     return sortedReviews;
   };
+
+  // Pagination functions
+  const getPaginatedReviews = () => {
+    const sortedReviews = getSortedReviews();
+    const startIndex = (currentPage - 1) * reviewsPerPage;
+    const endIndex = startIndex + reviewsPerPage;
+    return sortedReviews.slice(startIndex, endIndex);
+  };
+
+  const totalPages = Math.ceil(getSortedReviews().length / reviewsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // Reset to first page when reviews change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [reviews, sortBy]);
 
   const getRatingColor = (rating) => {
     const clamped = Math.max(0, Math.min(5, rating));
@@ -488,7 +535,7 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
             <div className="text-center text-red-600 py-4">Error loading reviews: {error}</div>
           ) : reviews.length > 0 ? (
             <div className="space-y-3 sm:space-y-4">
-              {getSortedReviews().map((review) => (
+              {getPaginatedReviews().map((review) => (
                 <div key={review.id} className="bg-gray-50 rounded-lg p-3 sm:p-4">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
@@ -562,6 +609,45 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
                   </div>
                 </div>
               ))}
+              
+              {/* Pagination Navigation */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-4 mt-6">
+                  <button
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 1}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                      currentPage === 1
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-green-600 text-white hover:bg-green-700'
+                    }`}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                  </button>
+                  
+                  <span className="text-sm text-gray-600">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  
+                  <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                      currentPage === totalPages
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-green-600 text-white hover:bg-green-700'
+                    }`}
+                  >
+                    Next
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <p className="text-gray-500 text-center py-4">No reviews yet. Be the first to review this restaurant!</p>

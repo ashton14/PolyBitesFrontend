@@ -405,11 +405,19 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
         credentials: 'include'
       });
 
-      const responseData = await response.json();
-
       if (!response.ok) {
-        throw new Error(responseData.error || 'Failed to delete review');
+        let errorMessage = 'Failed to delete review';
+        try {
+          const responseData = await response.json();
+          errorMessage = responseData.error || responseData.message || errorMessage;
+        } catch (parseError) {
+          // If response is not JSON, use the status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
+
+      const responseData = await response.json();
 
       // Fetch updated reviews and stats
       const [updatedReviewsResponse, updatedStatsResponse] = await Promise.all([
@@ -428,7 +436,21 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
       }
     } catch (error) {
       console.error('Error deleting review:', error);
-      alert(error.message || 'Failed to delete review. Please try again.');
+      console.error('Review ID:', reviewId);
+      console.error('User ID:', user?.id);
+      
+      let errorMessage = 'Failed to delete review. Please try again.';
+      if (error.message.includes('500')) {
+        errorMessage = 'Server error occurred. Please try again later or contact support.';
+      } else if (error.message.includes('403') || error.message.includes('401')) {
+        errorMessage = 'You are not authorized to delete this review.';
+      } else if (error.message.includes('404')) {
+        errorMessage = 'Review not found. It may have already been deleted.';
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      alert(errorMessage);
     }
   };
 
@@ -508,11 +530,6 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
   // Report review handlers
   const handleReportReview = (reviewId) => {
     setReportModal({ isOpen: true, reviewId });
-  };
-
-  const handleReportSuccess = () => {
-    // Could show a success message or refresh data
-    console.log('Review reported successfully');
   };
 
   // Sort reviews based on selected option
@@ -774,7 +791,6 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
         onClose={() => setReportModal({ isOpen: false, reviewId: null })}
         reviewId={reportModal.reviewId}
         reviewType="food"
-        onSuccess={handleReportSuccess}
       />
     </>
   );
