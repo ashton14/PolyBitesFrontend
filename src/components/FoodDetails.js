@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ReviewForm from './ReviewForm';
+import ReportReviewForm from './ReportReviewForm';
 import { useAuth } from '../context/AuthContext';
 import SignInPopup from './SignInPopup';
 import SignUpPopup from './SignUpPopup';
@@ -46,6 +47,9 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
   const [userLikes, setUserLikes] = useState(new Set()); // Track which reviews the user has liked
   const [likeLoading, setLikeLoading] = useState(new Set()); // Track which reviews are being processed
   const [sortBy, setSortBy] = useState('likes'); // Sort by likes (default) or recent
+  
+  // Report system state - simplified
+  const [reportModal, setReportModal] = useState({ isOpen: false, reviewId: null });
 
   const [currentFoodId, setCurrentFoodId] = useState(null);
 
@@ -115,7 +119,6 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
       }
       const userData = await response.json();
       const userName = userData.name;
-      console.log('Fetched name for', userId, ':', userName); // DEBUG
       
       // Cache the result
       userNameCache.set(userId, userName);
@@ -137,8 +140,6 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
 
   // Batch fetch user names for all reviews
   const fetchUserNamesBatch = useCallback(async (reviewsData) => {
-    console.log('Current user:', user);
-    console.log('Review user IDs:', reviewsData.map(r => r.user_id));
     const uniqueUserIds = [...new Set(reviewsData.map(review => review.user_id))];
     const uncachedUserIds = uniqueUserIds.filter(userId => !userNameCache.has(userId));
     // Add current user to cache if not present
@@ -148,9 +149,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
         ...prev,
         [user.id]: user.name
       }));
-      console.log('Set current user name in cache:', user.id, user.name);
     }
-    console.log('Fetching user names for:', uncachedUserIds); // DEBUG
     const promises = uncachedUserIds.map(userId => fetchUserName(userId));
     await Promise.all(promises);
   }, [fetchUserName, user]);
@@ -275,15 +274,12 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
           const response = await fetch(getApiUrl(`api/profiles/auth/${user.id}`));
           if (response.ok) {
             const profile = await response.json();
-            console.log('Fetched profile for current user:', profile); // DEBUG
             if (profile.name) {
               userNameCache.set(user.id, profile.name);
               setUserNames(prev => {
                 const updated = { ...prev, [user.id]: profile.name };
-                console.log('Updated userNames after setting own name:', updated); // DEBUG
                 return updated;
               });
-              console.log('Fetched and set own profile name:', user.id, profile.name);
             } else {
               console.log('Profile has no name property or is empty:', profile);
             }
@@ -509,6 +505,16 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
   // Throttled version of handleLikeReview
   const throttledHandleLikeReview = throttle(handleLikeReview, 500); // 500ms throttle
 
+  // Report review handlers
+  const handleReportReview = (reviewId) => {
+    setReportModal({ isOpen: true, reviewId });
+  };
+
+  const handleReportSuccess = () => {
+    // Could show a success message or refresh data
+    console.log('Review reported successfully');
+  };
+
   // Sort reviews based on selected option
   const getSortedReviews = () => {
     if (!reviews.length) return [];
@@ -560,7 +566,8 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={handleClose}>
+    <>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={handleClose}>
       <div className="food-review-popup bg-white rounded-lg max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
         <div className="relative flex flex-col items-center justify-center">
           <div className="flex flex-row justify-center items-center gap-4 my-4">
@@ -706,7 +713,17 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
                             </div>
                           </div>
                           <p className="text-gray-600">{review.text}</p>
-                          <div className="flex justify-end mt-2">
+                          <div className="flex justify-between items-center mt-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleReportReview(review.id);
+                              }}
+                              className="text-xs text-red-500 hover:text-red-700 transition-colors"
+                              title="Report review"
+                            >
+                              Report
+                            </button>
                             <button
                               onClick={() => throttledHandleLikeReview(review.id)}
                               disabled={likeLoading.has(review.id)}
@@ -749,6 +766,16 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
           )}
         </div>
       </div>
-    </div>
+      </div>
+
+      {/* Report Review Form - Separate popup */}
+      <ReportReviewForm
+        isOpen={reportModal.isOpen}
+        onClose={() => setReportModal({ isOpen: false, reviewId: null })}
+        reviewId={reportModal.reviewId}
+        reviewType="food"
+        onSuccess={handleReportSuccess}
+      />
+    </>
   );
 } 

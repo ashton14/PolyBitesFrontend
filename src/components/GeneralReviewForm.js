@@ -61,7 +61,6 @@ export default function GeneralReviewForm({ restaurantId, onSubmit, onCancel }) 
     for (let i = 1; i <= 5; i++) {
       const isFull = i <= displayRating;
       const isHalf = i - 0.5 === displayRating;
-      const isEmpty = i > displayRating && i - 0.5 > displayRating;
       
       let starImage = emptyStar;
       if (isFull) starImage = fullStar;
@@ -99,18 +98,18 @@ export default function GeneralReviewForm({ restaurantId, onSubmit, onCancel }) 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-green-50 p-6 rounded-lg">
-      <h4 className="text-xl font-semibold text-gray-800">Write a Restaurant Review</h4>
+    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 bg-green-50 p-4 sm:p-6 rounded-lg">
+      <h4 className="text-lg sm:text-xl font-semibold text-gray-800">Write a Restaurant Review</h4>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">
+        <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">
           Rating
         </label>
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {renderStarRating()}
           </div>
-          <span className="text-gray-600 font-medium ml-2">
+          <span className="text-sm sm:text-base text-gray-600 font-medium ml-2">
             {formData.rating} / 5
           </span>
         </div>
@@ -126,7 +125,7 @@ export default function GeneralReviewForm({ restaurantId, onSubmit, onCancel }) 
           value={formData.text}
           onChange={handleChange}
           rows="4"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           placeholder="Share your experience with this restaurant..."
           required
         />
@@ -146,17 +145,17 @@ export default function GeneralReviewForm({ restaurantId, onSubmit, onCancel }) 
         </label>
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
         <button
           type="submit"
-          className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium"
+          className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium text-sm sm:text-base"
         >
           Submit Review
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors font-medium"
+          className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors font-medium text-sm sm:text-base"
         >
           Cancel
         </button>

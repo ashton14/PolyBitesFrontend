@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import GeneralReviewForm from './GeneralReviewForm';
+import ReportReviewForm from './ReportReviewForm';
 import SignInPopup from './SignInPopup';
 import SignUpPopup from './SignUpPopup';
 import fullStar from '../assets/stars/star.png';
@@ -44,6 +45,10 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
   const [userLikes, setUserLikes] = useState(new Set());
   const [likeLoading, setLikeLoading] = useState(new Set());
   const [sortBy, setSortBy] = useState('likes');
+  
+  // Report system state
+  const [showReportForm, setShowReportForm] = useState(false);
+  const [reportingReviewId, setReportingReviewId] = useState(null);
 
   const handleWriteReviewClick = () => {
     if (user) {
@@ -350,6 +355,17 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
     }
   };
 
+  // Report review handlers
+  const handleReportReview = (reviewId) => {
+    setReportingReviewId(reviewId);
+    setShowReportForm(true);
+  };
+
+  const handleReportSuccess = () => {
+    // Could show a success message or refresh data
+    console.log('Review reported successfully');
+  };
+
   const renderStars = (rating) => {
     const stars = [];
     let remaining = Math.round(rating * 2) / 2;
@@ -403,12 +419,12 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
 
   return (
     <div className="mt-8 border-t border-gray-200 pt-8">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-semibold text-gray-800">Restaurant Reviews</h3>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-6">
+        <h3 className="text-xl sm:text-2xl font-semibold text-gray-800">Restaurant Reviews</h3>
         {!isWritingReview && (
           <button
             onClick={handleWriteReviewClick}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
           >
             Write a Review
           </button>
@@ -441,26 +457,24 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
         />
       ) : (
         <>
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <span
-                  className="font-bold text-lg"
-                  style={{ color: getRatingColor(reviewStats.average_rating) }}
-                >
-                  {reviewStats.average_rating ? Number(reviewStats.average_rating).toFixed(1) : '0.0'}
-                </span>
-                <span className="flex items-center">{renderStars(reviewStats.average_rating)}</span>
-                <span className="text-gray-500 text-sm">({reviewStats.review_count || 0} reviews)</span>
-              </div>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span
+                className="font-bold text-base sm:text-lg"
+                style={{ color: getRatingColor(reviewStats.average_rating) }}
+              >
+                {reviewStats.average_rating ? Number(reviewStats.average_rating).toFixed(1) : '0.0'}
+              </span>
+              <span className="flex items-center">{renderStars(reviewStats.average_rating)}</span>
+              <span className="text-gray-500 text-xs sm:text-sm">({reviewStats.review_count || 0} reviews)</span>
             </div>
-            <div className="flex items-center gap-2">
-              <label htmlFor="sort-select" className="text-sm text-gray-600">Sort by:</label>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <label htmlFor="sort-select" className="text-xs sm:text-sm text-gray-600 whitespace-nowrap">Sort by:</label>
               <select
                 id="sort-select"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="flex-1 sm:flex-none px-2 sm:px-3 py-1.5 sm:py-1 border border-gray-300 rounded-md text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <option value="likes">Most Liked</option>
                 <option value="recent">Most Recent</option>
@@ -473,17 +487,17 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
           ) : error ? (
             <div className="text-center text-red-600 py-4">Error loading reviews: {error}</div>
           ) : reviews.length > 0 ? (
-            <div className="space-y-3">
+            <div className="space-y-3 sm:space-y-4">
               {getSortedReviews().map((review) => (
-                <div key={review.id} className="bg-gray-50 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-gray-800">
+                <div key={review.id} className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span className="font-medium text-sm sm:text-base text-gray-800">
                         {review.anonymous
                           ? getRandomAnonymousName(review.id)
                           : (formatName(userNames[review.user_id]) || 'User')}
                       </span>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-xs sm:text-sm text-gray-500">
                         {review.created_at ? new Date(review.created_at).toLocaleDateString('en-US', {
                           month: '2-digit',
                           day: '2-digit',
@@ -492,7 +506,7 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 justify-between sm:justify-end">
                       <span className="text-green-600 flex items-center">{renderStars(review.rating)}</span>
                       {user && user.id === review.user_id && (
                         <button
@@ -500,15 +514,22 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
                           className="text-red-500 hover:text-red-700 transition-colors"
                           title="Delete review"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                           </svg>
                         </button>
                       )}
                     </div>
                   </div>
-                  <p className="text-gray-600">{review.text}</p>
-                  <div className="flex justify-end mt-2">
+                  <p className="text-sm sm:text-base text-gray-600 mb-2">{review.text}</p>
+                  <div className="flex justify-between items-center mt-2">
+                    <button
+                      onClick={() => handleReportReview(review.id)}
+                      className="text-xs text-red-500 hover:text-red-700 transition-colors"
+                      title="Report review"
+                    >
+                      Report
+                    </button>
                     <button
                       onClick={() => handleLikeReview(review.id)}
                       disabled={likeLoading.has(review.id)}
@@ -524,7 +545,7 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
                       ) : (
                         <svg 
                           xmlns="http://www.w3.org/2000/svg" 
-                          className="h-5 w-5" 
+                          className="h-4 w-4 sm:h-5 sm:w-5" 
                           viewBox="0 0 20 20" 
                           fill={userLikes.has(review.id) ? "currentColor" : "none"}
                           stroke="currentColor"
@@ -536,7 +557,7 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
                           />
                         </svg>
                       )}
-                      <span className="text-sm">{likeCounts.get(review.id) || 0}</span>
+                      <span className="text-xs sm:text-sm">{likeCounts.get(review.id) || 0}</span>
                     </button>
                   </div>
                 </div>
@@ -547,6 +568,18 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
           )}
         </>
       )}
+
+      {/* Report Review Form */}
+      <ReportReviewForm
+        isOpen={showReportForm}
+        onClose={() => {
+          setShowReportForm(false);
+          setReportingReviewId(null);
+        }}
+        reviewId={reportingReviewId}
+        reviewType="general"
+        onSuccess={handleReportSuccess}
+      />
     </div>
   );
 }
