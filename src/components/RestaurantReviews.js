@@ -664,7 +664,6 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
         }}
         reviewId={reportingReviewId}
         reviewType="general"
-        onSuccess={handleReportSuccess}
       />
     </div>
   );
