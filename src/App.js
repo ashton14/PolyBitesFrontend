@@ -51,8 +51,10 @@ function Layout({ children, isSignInOpen, setIsSignInOpen }) {
         onSwitchToSignIn={handleSwitchToSignIn}
       />
 
-      {/* Children */}
-      {children}
+      {/* Children with top padding to account for fixed navbar */}
+      <div className="pt-14">
+        {children}
+      </div>
     </div>
   );
 }
@@ -235,28 +237,60 @@ function HomePage({ restaurants, loading, error }) {
   return (
     <main>
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-green-600 to-green-500 text-white pt-4 pb-16 sm:pt-5 sm:pb-24 mb-16 sm:mb-20 relative overflow-hidden" style={{ height: '50vh', minHeight: 300 }}>
+        <div className="bg-gradient-to-br from-emerald-600 via-green-500 to-teal-600 text-white pt-4 pb-16 sm:pt-5 sm:pb-24 mb-16 sm:mb-20 relative overflow-hidden shadow-2xl" style={{ height: '60vh', minHeight: 400 }}>
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-10" style={{ zIndex: 0 }}>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform -skew-y-12 animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white to-transparent transform skew-y-12 animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+        
         {/* Opaque food image background */}
         <img
           src={require('./assets/images/food-back.jpg')}
           alt="Food background"
-          className="absolute inset-0 w-full h-full object-cover opacity-85 pointer-events-none select-none"
-          style={{ zIndex: 0, minHeight: 300 }}
+          className="absolute inset-0 w-full h-full object-cover opacity-70 pointer-events-none select-none transition-all duration-1000 hover:opacity-80"
+          style={{ zIndex: 1, minHeight: 400 }}
           loading="lazy"
           decoding="async"
         />
-        {/* Overlay for better blending */}
-        <div className="absolute inset-0 bg-gradient-to-b from-green-700/80 to-green-500/80" style={{ zIndex: 1, paddingTop: 0}}></div>
+        
+        {/* Enhanced overlay with multiple gradients */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-800/85 via-green-700/75 to-teal-600/85" style={{ zIndex: 2 }}></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" style={{ zIndex: 3 }}></div>
+        
+        {/* Floating elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-bounce" style={{ zIndex: 3, animationDelay: '0.5s' }}></div>
+        <div className="absolute top-20 right-16 w-16 h-16 bg-emerald-300/20 rounded-full blur-lg animate-bounce" style={{ zIndex: 3, animationDelay: '1.5s' }}></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-teal-300/15 rounded-full blur-md animate-bounce" style={{ zIndex: 3, animationDelay: '2s' }}></div>
+        
         <div className="container mx-auto px-4 text-center relative z-10 flex flex-col justify-center items-center h-full" >
-          <h1 className="text-4xl sm:text-6xl md:text-8xl text-black font-extrabold mb-4 sm:mb-8 animate-fade-in" style={{marginTop: 90}}>
-            PolyBites
+          {/* Glowing title */}
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold mb-4 sm:mb-8 animate-fade-in relative mt-[90px] md:mt-[150px]">
+            <span className="bg-gradient-to-r from-white via-emerald-100 to-teal-100 bg-clip-text text-transparent drop-shadow-2xl">
+              PolyBites
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-emerald-100 to-teal-100 opacity-30 blur-lg -z-10"></div>
           </h1>
-          <p className="text-lg sm:text-2xl md:text-4xl text-green-100 mb-6 sm:mb-12 font-semibold px-2">
-            <span className={`block transition-all duration-700 ${subtitleVisible[0] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>Your Ratings.</span>
-            <span className={`block transition-all duration-700 ${subtitleVisible[1] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>Your Reviews.</span>
-            <span className={`block transition-all duration-700 ${subtitleVisible[2] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>Your Restaurants.</span>
-          </p>
-          <div className="w-16 sm:w-24 h-1 bg-white mx-auto rounded-full opacity-50"></div>
+          
+          {/* Enhanced subtitle with better animations */}
+          <div className="text-lg sm:text-2xl md:text-4xl font-semibold px-2 mb-6 sm:mb-12">
+            <span className={`block transition-all duration-1000 ease-out transform ${subtitleVisible[0] ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'}`}>
+              <span className="bg-gradient-to-r from-emerald-100 to-teal-100 bg-clip-text text-transparent">Your Ratings.</span>
+            </span>
+            <span className={`block transition-all duration-1000 ease-out transform ${subtitleVisible[1] ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'}`} style={{ transitionDelay: '200ms' }}>
+              <span className="bg-gradient-to-r from-emerald-100 to-teal-100 bg-clip-text text-transparent">Your Reviews.</span>
+            </span>
+            <span className={`block transition-all duration-1000 ease-out transform ${subtitleVisible[2] ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'}`} style={{ transitionDelay: '400ms' }}>
+              <span className="bg-gradient-to-r from-emerald-100 to-teal-100 bg-clip-text text-transparent">Your Restaurants.</span>
+            </span>
+          </div>
+          
+          {/* Enhanced decorative line with glow */}
+          <div className="relative">
+            <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent mx-auto rounded-full opacity-80 shadow-lg"></div>
+            <div className="absolute inset-0 w-24 sm:w-32 h-1 bg-white mx-auto rounded-full opacity-30 blur-sm"></div>
+          </div>
+          
         </div>
         {/* Wave SVG divider */}
         {/* <div

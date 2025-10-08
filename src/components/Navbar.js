@@ -15,7 +15,7 @@ export default function Navbar({ onSignInOpen, onSignUpOpen }) {
   };
 
   return (
-    <header className="bg-green-600 text-white shadow-lg sticky top-0 z-50">
+    <header className="bg-green-600 text-white shadow-lg fixed top-0 left-0 right-0 z-50 w-full">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-14">
           {/* Logo */}
