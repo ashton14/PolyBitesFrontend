@@ -110,12 +110,10 @@ export default function ContactForm({ isOpen, onClose, onSignInOpen, initialSubj
   };
 
   const handleSignIn = () => {
-    console.log('handleSignIn called, onSignInOpen:', onSignInOpen);
     onClose();
     // Small delay to ensure the contact form modal closes before opening sign-in
     setTimeout(() => {
       if (onSignInOpen) {
-        console.log('Calling onSignInOpen');
         onSignInOpen();
       } else {
         console.error('onSignInOpen is not defined');

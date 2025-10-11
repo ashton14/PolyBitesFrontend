@@ -303,7 +303,7 @@ export default function ProfilePage() {
               }} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
+                    Username
                   </label>
                   <input
                     type="text"
@@ -378,7 +378,7 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                   {/* Full Name */}
                   <div className="flex justify-between items-center py-4 border-b border-gray-200">
-                    <span className="text-gray-600 font-medium">Full Name</span>
+                    <span className="text-gray-600 font-medium">Username</span>
                     <span className="text-gray-900 font-semibold text-lg">{profile?.name || 'Not set'}</span>
                   </div>
 
@@ -388,11 +388,6 @@ export default function ProfilePage() {
                     <span className="text-gray-900 text-lg">{user?.email}</span>
                   </div>
 
-                  {/* User ID */}
-                  <div className="flex justify-between items-center py-4 border-b border-gray-200">
-                    <span className="text-gray-600 font-medium">User ID</span>
-                    <span className="text-gray-900 text-lg">{user?.id}</span>
-                  </div>
                 </div>
 
                 <div className="mt-8">

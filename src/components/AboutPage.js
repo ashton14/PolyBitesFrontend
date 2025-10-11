@@ -45,8 +45,8 @@ export default function AboutPage({ onSignInOpen }) {
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-green-800 mb-3">What We Do</h3>
                 <ul className="space-y-2 text-green-700">
-                  <li>• Comprehensive restaurant reviews and ratings</li>
-                  <li>• Detailed menu item evaluations</li>
+                  <li>• Allow users to post reviews about restaurants</li>
+                  <li>• Allow users to post reviews about food items</li>
                   <li>• Real-time feedback from the Cal Poly community</li>
                   <li>• Help you make informed dining decisions</li>
                 </ul>

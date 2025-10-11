@@ -20,11 +20,11 @@ export default function FAQsPage({ onSignInOpen }) {
     },
     {
       question: "How do I write a review?",
-      answer: "Navigate to any restaurant or food item page, and you'll see a 'Write a Review' button. Click it to open the review form where you can rate the item (1-5 stars) and write your thoughts."
+      answer: "Navigate to any restaurant or food item page, and you'll see a 'Write a Review' button. Click it to open the review form where you can leave a rating (1-5 stars) and write your thoughts."
     },
     {
       question: "What should I include in my review?",
-      answer: "Good reviews include details about taste, portion size, value for money, service quality, and any unique aspects of the dish. Be honest and constructive in your feedback."
+      answer: "Good reviews include details about taste, portion size, value for money, service quality, and anything you liked or disliked. Be honest and constructive in your feedback."
     },
     {
       question: "Can I edit or delete my reviews?",
@@ -32,11 +32,11 @@ export default function FAQsPage({ onSignInOpen }) {
     },
     {
       question: "How are restaurant ratings calculated?",
-      answer: "Restaurant ratings are calculated as the average of all individual food item ratings from that restaurant, weighted by the number of reviews."
+      answer: "Restaurant ratings are calculated as the average of all restaurant ratings and individual food item ratings from that restaurant."
     },
     {
       question: "What if I find inappropriate content?",
-      answer: "We have automated profanity filters in place, but if you encounter inappropriate content, please report it to our support team immediately."
+      answer: "We have automated profanity filters in place, but if you encounter inappropriate content, please report it to our support team immediately by clicking the 'Report' button on the review page."
     },
     {
       question: "Is PolyBites only for Cal Poly students?",
@@ -44,7 +44,7 @@ export default function FAQsPage({ onSignInOpen }) {
     },
     {
       question: "How often are new restaurants added?",
-      answer: "We regularly update our database to include new campus dining locations. If you notice a missing restaurant, please let us know!"
+      answer: "We regularly update our database to include new campus dining locations. If you notice a missing restaurant, please let us know by clicking the 'Missing Something?' button on the restaurant page."
     }
   ];
 
