@@ -236,40 +236,31 @@ function HomePage({ restaurants, loading, error }) {
 
   return (
     <main>
-      {/* Hero Section */}
+      {/* Hero Section - Optimized for Performance */}
         <div className="bg-gradient-to-br from-emerald-600 via-green-500 to-teal-600 text-white pt-4 pb-16 sm:pt-5 sm:pb-24 mb-16 sm:mb-20 relative overflow-hidden shadow-2xl" style={{ height: '60vh', minHeight: 400 }}>
-        {/* Animated background pattern */}
-        <div className="absolute inset-0 opacity-10" style={{ zIndex: 0 }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform -skew-y-12 animate-pulse"></div>
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white to-transparent transform skew-y-12 animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
         
-        {/* Opaque food image background */}
+        {/* Opaque food image background - optimized */}
         <img
           src={require('./assets/images/food-back.jpg')}
           alt="Food background"
-          className="absolute inset-0 w-full h-full object-cover opacity-70 pointer-events-none select-none transition-all duration-1000 hover:opacity-80"
-          style={{ zIndex: 1, minHeight: 400 }}
+          className="absolute inset-0 w-full h-full object-cover opacity-70 pointer-events-none select-none"
+          style={{ zIndex: 1, minHeight: 400, willChange: 'auto' }}
           loading="lazy"
           decoding="async"
         />
         
-        {/* Enhanced overlay with multiple gradients */}
+        {/* Single optimized overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-800/85 via-green-700/75 to-teal-600/85" style={{ zIndex: 2 }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" style={{ zIndex: 3 }}></div>
-        
-        {/* Floating elements */}
-        <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-bounce" style={{ zIndex: 3, animationDelay: '0.5s' }}></div>
-        <div className="absolute top-20 right-16 w-16 h-16 bg-emerald-300/20 rounded-full blur-lg animate-bounce" style={{ zIndex: 3, animationDelay: '1.5s' }}></div>
-        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-teal-300/15 rounded-full blur-md animate-bounce" style={{ zIndex: 3, animationDelay: '2s' }}></div>
         
         <div className="container mx-auto px-4 text-center relative z-10 flex flex-col justify-center items-center h-full" >
-          {/* Glowing title */}
+          {/* Brighter, more vibrant title */}
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold mb-4 sm:mb-8 animate-fade-in relative mt-[90px] md:mt-[150px]">
-            <span className="bg-gradient-to-r from-white via-emerald-100 to-teal-100 bg-clip-text text-transparent drop-shadow-2xl">
+            <span className="bg-gradient-to-r from-white via-white to-emerald-50 bg-clip-text text-transparent" style={{ 
+              filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))',
+              WebkitTextStroke: '1px rgba(255, 255, 255, 0.3)'
+            }}>
               PolyBites
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-emerald-100 to-teal-100 opacity-30 blur-lg -z-10"></div>
           </h1>
           
           {/* Enhanced subtitle with better animations */}
@@ -285,11 +276,8 @@ function HomePage({ restaurants, loading, error }) {
             </span>
           </div>
           
-          {/* Enhanced decorative line with glow */}
-          <div className="relative">
-            <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent mx-auto rounded-full opacity-80 shadow-lg"></div>
-            <div className="absolute inset-0 w-24 sm:w-32 h-1 bg-white mx-auto rounded-full opacity-30 blur-sm"></div>
-          </div>
+          {/* Simplified decorative line */}
+          <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent mx-auto rounded-full opacity-80"></div>
           
         </div>
         {/* Wave SVG divider */}
