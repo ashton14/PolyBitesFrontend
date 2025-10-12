@@ -15,7 +15,7 @@ export default function Navbar({ onSignInOpen, onSignUpOpen }) {
   };
 
   return (
-    <header className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white shadow-xl fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-sm">
+    <header className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white shadow-xl fixed top-0 left-0 right-0 z-[100] w-full backdrop-blur-sm">
       {/* Subtle top border for depth */}
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-emerald-400 via-white to-teal-400 opacity-40"></div>
       
