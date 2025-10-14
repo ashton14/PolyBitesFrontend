@@ -4,13 +4,16 @@ import '../styles/Restaurant.css';
 import fullStar from '../assets/stars/star.png';
 import valueIcon from '../assets/icons/value.png';
 
-const Restaurant = React.memo(({ data, loading = false }) => {
+const Restaurant = React.memo(({ data, loading = false, statsLoading = false }) => {
   // Use the data that's already available from the main API call
   const averageRating = data?.average_rating || 0;
   const reviewCount = data?.review_count || 0;
   const menuItemCount = data?.menu_item_count || 0;
   const formattedRating = Number(averageRating).toFixed(1);
   const formattedValue = typeof data?.average_value === 'number' && data.average_value > 0 ? Math.trunc(data.average_value * 100) : null;
+  
+  // Check if stats are still loading (no rating data available yet)
+  const isStatsLoading = statsLoading && (!data?.average_rating && !data?.review_count && !data?.average_value);
 
   // Skeleton loading component
   if (loading || !data) {
@@ -72,8 +75,14 @@ const Restaurant = React.memo(({ data, loading = false }) => {
         />
         {/* Rating badge with enhanced styling */}
         <div className="absolute top-0 right-0 m-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-1 shadow-lg backdrop-blur-sm">
-          {formattedRating}
-          <img src={fullStar} alt="star" className="w-4 h-4 inline" />
+          {isStatsLoading ? (
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+          ) : (
+            <>
+              {formattedRating}
+              <img src={fullStar} alt="star" className="w-4 h-4 inline" />
+            </>
+          )}
         </div>
         {/* Value badge with enhanced styling */}
         {formattedValue !== null && (

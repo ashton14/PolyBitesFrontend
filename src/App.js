@@ -59,7 +59,7 @@ function Layout({ children, isSignInOpen, setIsSignInOpen }) {
   );
 }
 
-function HomePage({ restaurants, loading, error }) {
+function HomePage({ restaurants, loading, error, pagination, currentPage, onPageChange, statsLoading }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
   const [hasSearched, setHasSearched] = useState(false);
@@ -534,6 +534,12 @@ function HomePage({ restaurants, loading, error }) {
                     ? `${filteredRestaurants.length} restaurant${filteredRestaurants.length !== 1 ? 's' : ''} found`
                     : `${restaurants.length} restaurant${restaurants.length !== 1 ? 's' : ''} available`
                   }
+                  {statsLoading && (
+                    <span className="ml-2 text-green-600 flex items-center justify-center sm:justify-start gap-1">
+                      <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-green-600"></div>
+                      Loading ratings...
+                    </span>
+                  )}
                 </div>
               )}
               
@@ -545,6 +551,7 @@ function HomePage({ restaurants, loading, error }) {
                       key={`skeleton-${index}`}
                       data={null}
                       loading={true}
+                      statsLoading={false}
                     />
                   ))
                 ) : (
@@ -553,6 +560,7 @@ function HomePage({ restaurants, loading, error }) {
                       <Restaurant
                         key={restaurant.id}
                         data={restaurant}
+                        statsLoading={statsLoading}
                       />
                     ))}
                     {filteredRestaurants.length === 0 && hasSearched && (
@@ -575,6 +583,36 @@ function HomePage({ restaurants, loading, error }) {
                   </>
                 )}
               </div>
+              
+              {/* Pagination Controls */}
+              {!loading && pagination.totalPages > 1 && (
+                <div className="mt-8 flex items-center justify-center gap-4">
+                  <button
+                    onClick={() => onPageChange(currentPage - 1)}
+                    disabled={!pagination.hasPrevPage}
+                    className="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Previous
+                  </button>
+                  
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-600">
+                      Page {currentPage} of {pagination.totalPages}
+                    </span>
+                    <span className="text-sm text-gray-500">
+                      ({pagination.totalCount} restaurants)
+                    </span>
+                  </div>
+                  
+                  <button
+                    onClick={() => onPageChange(currentPage + 1)}
+                    disabled={!pagination.hasNextPage}
+                    className="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </div>
           </>
         )}
@@ -586,21 +624,101 @@ function HomePage({ restaurants, loading, error }) {
 export default function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [statsLoading, setStatsLoading] = useState(false);
   const [error, setError] = useState(null);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 20,
+    totalCount: 0,
+    totalPages: 0,
+    hasNextPage: false,
+    hasPrevPage: false
+  });
 
-  const fetchRestaurants = async () => {
+  const fetchRestaurants = async (page = 1) => {
     try {
-      const response = await fetch(getApiUrl('api/restaurants'));
+      setLoading(true);
+      setError(null);
+      
+      // Fetch basic restaurant info first (fast)
+      const response = await fetch(getApiUrl(`api/restaurants?page=${page}&limit=20`));
       if (!response.ok) {
         throw new Error('Failed to fetch restaurants');
       }
-      const data = await response.json();
+      const responseData = await response.json();
+      
+      // Handle new paginated response format
+      const data = responseData.data || responseData; // Fallback for old format
+      const paginationData = responseData.pagination || {
+        page: 1,
+        limit: 20,
+        totalCount: data.length,
+        totalPages: 1,
+        hasNextPage: false,
+        hasPrevPage: false
+      };
+      
+      // Set basic restaurant data immediately
       setRestaurants(data);
+      setPagination(paginationData);
+      setCurrentPage(page);
       setLoading(false);
+      
+      // Then fetch stats for each restaurant (progressive loading)
+      await fetchRestaurantStats(data);
+      
     } catch (err) {
       console.error('Error fetching restaurants:', err);
       setError(err.message);
       setLoading(false);
+      setStatsLoading(false);
+    }
+  };
+
+  const fetchRestaurantStats = async (restaurantData) => {
+    try {
+      setStatsLoading(true);
+      
+      // Fetch stats for all restaurants in parallel
+      const statsPromises = restaurantData.map(async (restaurant) => {
+        try {
+          const statsResponse = await fetch(getApiUrl(`api/restaurants/${restaurant.id}/stats`));
+          if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            return { id: restaurant.id, stats };
+          }
+        } catch (err) {
+          console.warn(`Failed to fetch stats for restaurant ${restaurant.id}:`, err);
+          // Return default stats if API fails
+          return { 
+            id: restaurant.id, 
+            stats: { 
+              average_rating: 0, 
+              review_count: 0, 
+              average_value: 0 
+            } 
+          };
+        }
+        return null;
+      });
+      
+      const statsResults = await Promise.all(statsPromises);
+      
+      // Update restaurants with stats data
+      setRestaurants(prevRestaurants => 
+        prevRestaurants.map(restaurant => {
+          const statsResult = statsResults.find(result => result && result.id === restaurant.id);
+          return statsResult ? { ...restaurant, ...statsResult.stats } : restaurant;
+        })
+      );
+      
+    } catch (err) {
+      console.error('Error fetching restaurant stats:', err);
+    } finally {
+      setStatsLoading(false);
     }
   };
 
@@ -624,7 +742,11 @@ export default function App() {
                 element={<HomePage 
                   restaurants={restaurants || []} 
                   loading={loading} 
-                  error={error} 
+                  error={error}
+                  pagination={pagination}
+                  currentPage={currentPage}
+                  onPageChange={fetchRestaurants}
+                  statsLoading={statsLoading}
                 />}
               />
               <Route

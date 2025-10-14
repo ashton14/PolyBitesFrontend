@@ -431,7 +431,7 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
         throw new Error(errorMessage);
       }
 
-      const responseData = await response.json();
+      await response.json();
 
       // Fetch updated reviews and stats
       const [updatedReviewsResponse, updatedStatsResponse] = await Promise.all([

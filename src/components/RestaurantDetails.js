@@ -96,11 +96,14 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
 
       setSearchLoading(true);
       try {
-        const response = await fetch(getApiUrl(`api/foods/restaurant/${id}/search?q=${encodeURIComponent(debouncedSearchTerm)}`));
+        const response = await fetch(getApiUrl(`api/foods/restaurant/${id}/search?q=${encodeURIComponent(debouncedSearchTerm)}&page=1&limit=100`));
         if (!response.ok) {
           throw new Error('Failed to search food items');
         }
-        const searchResults = await response.json();
+        const responseData = await response.json();
+        
+        // Handle new paginated response format
+        const searchResults = responseData.data || responseData; // Fallback for old format
         setFilteredMenuItems(searchResults);
         setHasSearched(true);
         setDisplayedSearchTerm(debouncedSearchTerm);
@@ -229,11 +232,14 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch(getApiUrl(`api/foods/restaurant/${id}`));
+        const response = await fetch(getApiUrl(`api/foods/restaurant/${id}?page=1&limit=100`));
         if (!response.ok) {
           throw new Error('Failed to fetch menu items');
         }
-        const data = await response.json();
+        const responseData = await response.json();
+        
+        // Handle new paginated response format
+        const data = responseData.data || responseData; // Fallback for old format
         setMenuItems(data);
         
         // Fetch all food ratings for this restaurant in one call
