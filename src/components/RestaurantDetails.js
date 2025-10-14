@@ -354,15 +354,19 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
 
   return (
     <div ref={pageRef} className="relative min-h-screen">
-      {/* Fixed back button */}
-      <div className="fixed top-20 left-2 sm:left-4 md:left-8 z-[60]">
+      {/* Enhanced floating back button */}
+      <div className="fixed top-20 left-4 sm:left-6 md:left-8 z-[60]">
         <button
           onClick={() => navigate('/')}
-          className="px-3 py-2 sm:px-6 sm:py-2.5 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors flex items-center gap-1 sm:gap-2 shadow-lg text-sm sm:text-base"
+          className="group px-4 py-3 sm:px-6 sm:py-4 bg-white/95 backdrop-blur-sm text-green-600 rounded-xl hover:bg-white hover:shadow-xl transition-all duration-300 flex items-center gap-2 sm:gap-3 shadow-lg border border-green-200/50 hover:border-green-300 hover:scale-105 active:scale-100"
         >
-          <span>←</span> 
-          <span className="hidden sm:inline">Back to list</span>
-          <span className="sm:hidden">Back</span>
+          <div className="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 bg-green-600 text-white rounded-full group-hover:bg-green-700 transition-colors">
+            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            </svg>
+          </div>
+          <span className="hidden sm:inline font-semibold text-sm sm:text-base">Back to Restaurants</span>
+          <span className="sm:hidden font-semibold text-sm">Back</span>
         </button>
       </div>
 
@@ -440,15 +444,16 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
             ) : menuItems.length > 0 ? (
               <div className="mt-6 sm:mt-8">
                 <div className="flex flex-col space-y-4 mb-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 flex-1">
                       {hasSearched && displayedSearchTerm.trim() ? `Results for "${displayedSearchTerm}"` : 'Menu Items'}
                     </h3>
                     <button
                       onClick={() => setIsContactFormOpen(true)}
-                      className="text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors font-medium border border-green-300 hover:border-green-400"
+                      className="text-xs sm:text-sm px-2 py-1 sm:px-4 sm:py-2 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors font-medium border border-green-300 hover:border-green-400 flex-shrink-0"
                     >
-                      Something missing? Let us know!
+                      <span className="sm:hidden">Missing item?</span>
+                      <span className="hidden sm:inline">Something missing? Let us know!</span>
                     </button>
                   </div>
                   
