@@ -200,8 +200,13 @@ export default function RestaurantDetails({ restaurants, onRestaurantUpdate }) {
 
   // Memoized sorted menu items
   const sortedMenuItems = useMemo(() => {
+    // If user has searched and there are no filtered results, return empty array
+    if (hasSearched && filteredMenuItems.length === 0) {
+      return [];
+    }
+    // Otherwise, use filtered items if available, or all items if not searching
     return sortMenuItems(filteredMenuItems.length > 0 ? filteredMenuItems : menuItems, foodRatings, sortBy);
-  }, [filteredMenuItems, menuItems, foodRatings, sortBy, sortMenuItems]);
+  }, [filteredMenuItems, menuItems, foodRatings, sortBy, sortMenuItems, hasSearched]);
 
   // Function to refresh restaurant data
   const refreshRestaurantData = async () => {
