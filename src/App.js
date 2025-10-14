@@ -309,8 +309,12 @@ function HomePage({ restaurants, loading, error }) {
       <div className="container mx-auto px-4 -mt-32 sm:-mt-44 pt-24 sm:pt-32 pb-4 rounded-t-lg z-20" style={{position: 'relative'}}>
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-green-600 mb-4"></div>
-            <p className="text-gray-600">Loading restaurants...</p>
+            <div className="relative inline-block">
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-green-600 mb-4"></div>
+              <div className="absolute inset-0 rounded-full h-12 w-12 border-4 border-transparent border-r-green-400 animate-spin mb-4" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+            </div>
+            <p className="text-gray-600 font-medium">Loading restaurants...</p>
+            <p className="text-gray-400 text-sm mt-1">Discovering the best dining spots</p>
           </div>
         ) : error ? (
           <div className="text-center py-12">
@@ -523,17 +527,52 @@ function HomePage({ restaurants, loading, error }) {
                   </div>
                 </div>
               </div>
+              {/* Result count */}
+              {!loading && (
+                <div className="mb-4 text-sm text-gray-600 text-center sm:text-left">
+                  {hasSearched && displayedSearchTerm.trim() 
+                    ? `${filteredRestaurants.length} restaurant${filteredRestaurants.length !== 1 ? 's' : ''} found`
+                    : `${restaurants.length} restaurant${restaurants.length !== 1 ? 's' : ''} available`
+                  }
+                </div>
+              )}
+              
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pb-8 sm:pb-12 justify-items-center">
-                {filteredRestaurants.map((restaurant) => (
-                  <Restaurant
-                    key={restaurant.id}
-                    data={restaurant}
-                  />
-                ))}
-                {filteredRestaurants.length === 0 && hasSearched && (
-                  <div className="col-span-full text-center py-8 text-gray-500">
-                    No restaurants found matching "{displayedSearchTerm}"
-                  </div>
+                {loading ? (
+                  // Show skeleton loading states
+                  Array.from({ length: 8 }).map((_, index) => (
+                    <Restaurant
+                      key={`skeleton-${index}`}
+                      data={null}
+                      loading={true}
+                    />
+                  ))
+                ) : (
+                  <>
+                    {filteredRestaurants.map((restaurant) => (
+                      <Restaurant
+                        key={restaurant.id}
+                        data={restaurant}
+                      />
+                    ))}
+                    {filteredRestaurants.length === 0 && hasSearched && (
+                      <div className="col-span-full text-center py-12">
+                        <div className="text-gray-400 mb-4">
+                          <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-600 mb-2">No restaurants found</h3>
+                        <p className="text-gray-500 mb-4">No restaurants match "{displayedSearchTerm}"</p>
+                        <button
+                          onClick={clearSearch}
+                          className="text-green-600 hover:text-green-700 font-medium"
+                        >
+                          Clear search
+                        </button>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>

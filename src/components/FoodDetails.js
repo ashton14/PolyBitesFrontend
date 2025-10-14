@@ -52,6 +52,10 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
   const [reportModal, setReportModal] = useState({ isOpen: false, reviewId: null });
 
   const [currentFoodId, setCurrentFoodId] = useState(null);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 5;
 
   // Function to get gradient color based on value
   const getValueColor = (value) => {
@@ -299,6 +303,16 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
       fetchUserNamesBatch(reviews);
     }
   }, [reviews, fetchUserNamesBatch]);
+
+  // Reset to page 1 when sorting changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [sortBy]);
+
+  // Reset to page 1 when reviews change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [reviews.length]);
 
   if (!isOpen || !foodItem) return null;
 
@@ -563,6 +577,16 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
     return sortedReviews;
   };
 
+  // Pagination logic
+  const getPaginatedReviews = () => {
+    const sorted = getSortedReviews();
+    const startIndex = (currentPage - 1) * reviewsPerPage;
+    const endIndex = startIndex + reviewsPerPage;
+    return sorted.slice(startIndex, endIndex);
+  };
+
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+
   // Returns a color from red (0) to green (5) for the rating
   const getRatingColor = (rating) => {
     // Clamp rating between 0 and 5
@@ -694,12 +718,12 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
                   <div className="text-center text-red-600 py-4">Error loading reviews: {error}</div>
                 ) : reviews.length > 0 ? (
                   <div className="space-y-3">
-                    {getSortedReviews().map((review) => {
+                    {getPaginatedReviews().map((review) => {
                       return (
                         <div key={review.id} className="bg-gray-50 rounded-lg p-4">
-                          <div className="flex items-center justify-between mb-2">
-
-                            <div className="flex items-center gap-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2">
+                            {/* User info and date */}
+                            <div className="flex items-center gap-2 flex-wrap">
                               <span className="font-medium text-gray-800">
                                 {review.anonymous
                                   ? getRandomAnonymousName(review.id)
@@ -714,15 +738,16 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
                               </span>
                             </div>
 
-                            <div className="flex items-center gap-2">
-                             <span className="text-green-600 flex items-center">{renderStars(review.rating)}</span>
+                            {/* Stars and delete button */}
+                            <div className="flex items-center justify-between sm:justify-end gap-3">
+                              <span className="text-green-600 flex items-center">{renderStars(review.rating)}</span>
                               {user && user.id === review.user_id && (
                                 <button
                                   onClick={() => handleDeleteReview(review.id)}
-                                  className="text-red-500 hover:text-red-700 transition-colors"
+                                  className="text-red-500 hover:text-red-700 transition-colors p-1 rounded-full hover:bg-red-50 flex-shrink-0"
                                   title="Delete review"
                                 >
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                                   </svg>
                                 </button>
@@ -778,7 +803,54 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
                 ) : (
                   <p className="text-gray-500 text-center py-4">No reviews yet. Be the first to review!</p>
                 )}
-              </div>
+                
+                {/* Review count and Pagination Controls */}
+                {reviews.length > 0 && (
+                  <div className="mt-6 pt-4 border-t border-gray-200">
+                    {/* Review count */}
+                    <div className="text-center mb-4 text-sm text-gray-600">
+                      Showing {Math.min((currentPage - 1) * reviewsPerPage + 1, reviews.length)}-{Math.min(currentPage * reviewsPerPage, reviews.length)} of {reviews.length} review{reviews.length !== 1 ? 's' : ''}
+                    </div>
+                    
+                    {/* Pagination Controls */}
+                    {reviews.length > reviewsPerPage && (
+                      <div className="flex items-center justify-center gap-2">
+                        <button
+                          onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                          disabled={currentPage === 1}
+                          className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                          Previous
+                        </button>
+                        
+                        <div className="flex items-center gap-1">
+                          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                            <button
+                              key={page}
+                              onClick={() => setCurrentPage(page)}
+                              className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                                currentPage === page
+                                  ? 'bg-green-600 text-white'
+                                  : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                              }`}
+                            >
+                              {page}
+                            </button>
+                          ))}
+                        </div>
+                        
+                        <button
+                          onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                          disabled={currentPage === totalPages}
+                          className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+                </div>
             </>
           )}
         </div>
