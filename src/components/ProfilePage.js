@@ -22,7 +22,9 @@ export default function ProfilePage() {
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [userReviews, setUserReviews] = useState([]);
+  const [userGeneralReviews, setUserGeneralReviews] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
+  const [generalReviewsLoading, setGeneralReviewsLoading] = useState(false);
   const filter = new Filter();
 
   const getFoodIcon = (food_type) => {
@@ -89,6 +91,7 @@ export default function ProfilePage() {
   useEffect(() => {
     if (profile && user) {
       fetchUserReviews();
+      fetchUserGeneralReviews();
     }
   }, [profile, user]);
 
@@ -108,6 +111,25 @@ export default function ProfilePage() {
       setError('Failed to load your reviews');
     } finally {
       setReviewsLoading(false);
+    }
+  };
+
+  const fetchUserGeneralReviews = async () => {
+    if (!user) return;
+    
+    setGeneralReviewsLoading(true);
+    try {
+      const response = await fetch(getApiUrl(`api/general-reviews/user/${user.id}`));
+      if (!response.ok) {
+        throw new Error('Failed to fetch general reviews');
+      }
+      const reviewsData = await response.json();
+      setUserGeneralReviews(reviewsData);
+    } catch (err) {
+      console.error('Error fetching user general reviews:', err);
+      setError('Failed to load your general reviews');
+    } finally {
+      setGeneralReviewsLoading(false);
     }
   };
 
@@ -413,70 +435,151 @@ export default function ProfilePage() {
 
                 {/* User Reviews Section */}
                 <div className="mt-8 border-t border-gray-200 pt-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">My Reviews</h3>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-6">My Reviews</h3>
                   
-                  {reviewsLoading ? (
-                    <div className="text-center py-8">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
-                      <p className="mt-2 text-gray-600">Loading your reviews...</p>
-                    </div>
-                  ) : userReviews.length === 0 ? (
-                    <div className="text-center py-8">
-                      <p className="text-gray-500">You haven't written any reviews yet.</p>
-                      <Link 
-                        to="/" 
-                        className="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
-                      >
-                        Write Your First Review
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {userReviews.map((review) => {
-                        return (
-                          <div 
-                            key={review.id} 
-                            className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors cursor-pointer border border-gray-200"
-                            onClick={() => navigate(`/restaurant/${review.restaurant_id}?highlight=${review.food_id}`)}
-                          >
-                            <div className="flex justify-between items-start mb-2">
-                              <div className="flex items-center space-x-3">
-                                <img 
-                                  src={getFoodIcon(review.food_type)} 
-                                  alt={review.food_name} 
-                                  className="w-8 h-8 object-cover rounded"
-                                />
-                                <div>
-                                  <h4 className="font-semibold text-gray-800">{review.food_name}</h4>
-                                  <p className="text-sm text-gray-600">{review.restaurant_name}</p>
+                  {/* Food Reviews Section */}
+                  <div className="mb-8">
+                    <h4 className="text-lg font-medium text-gray-700 mb-4 flex items-center gap-2">
+                      <img src={require('../assets/images/dish.png')} alt="Food" className="w-5 h-5" />
+                      Food Reviews ({userReviews.length})
+                    </h4>
+                    
+                    {reviewsLoading ? (
+                      <div className="text-center py-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
+                        <p className="mt-2 text-gray-600">Loading your food reviews...</p>
+                      </div>
+                    ) : userReviews.length === 0 ? (
+                      <div className="text-center py-8 bg-gray-50 rounded-lg">
+                        <p className="text-gray-500">You haven't written any food reviews yet.</p>
+                        <Link 
+                          to="/" 
+                          className="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                        >
+                          Write Your First Food Review
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {userReviews.map((review) => {
+                          return (
+                            <div 
+                              key={review.id} 
+                              className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors cursor-pointer border border-gray-200"
+                              onClick={() => navigate(`/restaurant/${review.restaurant_id}?highlight=${review.food_id}`)}
+                            >
+                              <div className="flex justify-between items-start mb-2">
+                                <div className="flex items-center space-x-3">
+                                  <img 
+                                    src={getFoodIcon(review.food_type)} 
+                                    alt={review.food_name} 
+                                    className="w-8 h-8 object-cover rounded"
+                                  />
+                                  <div>
+                                    <h4 className="font-semibold text-gray-800">{review.food_name}</h4>
+                                    <p className="text-sm text-gray-600">{review.restaurant_name}</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  {renderStars(review.rating)}
                                 </div>
                               </div>
-                              <div className="flex items-center space-x-1">
-                                {renderStars(review.rating)}
+                              <p className="text-gray-700 text-sm overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{review.text}</p>
+                              <div className="flex justify-between items-center mt-2">
+                                <div className="flex items-center space-x-4">
+                                  <span className="text-xs text-gray-500">
+                                    {new Date(review.created_at).toLocaleDateString()}
+                                  </span>
+                                  <div className="flex items-center space-x-1 text-xs text-gray-500">
+                                    <span>❤</span>
+                                    <span>{review.like_count || 0}</span>
+                                  </div>
+                                </div>
+                                {review.anonymous && (
+                                  <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">
+                                    Anonymous
+                                  </span>
+                                )}
                               </div>
                             </div>
-                            <p className="text-gray-700 text-sm overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{review.text}</p>
-                            <div className="flex justify-between items-center mt-2">
-                              <div className="flex items-center space-x-4">
-                                <span className="text-xs text-gray-500">
-                                  {new Date(review.created_at).toLocaleDateString()}
-                                </span>
-                                <div className="flex items-center space-x-1 text-xs text-gray-500">
-                                  <span>❤</span>
-                                  <span>{review.like_count || 0}</span>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* General Reviews Section */}
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-700 mb-4 flex items-center gap-2">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                      Restaurant Reviews ({userGeneralReviews.length})
+                    </h4>
+                    
+                    {generalReviewsLoading ? (
+                      <div className="text-center py-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
+                        <p className="mt-2 text-gray-600">Loading your restaurant reviews...</p>
+                      </div>
+                    ) : userGeneralReviews.length === 0 ? (
+                      <div className="text-center py-8 bg-gray-50 rounded-lg">
+                        <p className="text-gray-500">You haven't written any restaurant reviews yet.</p>
+                        <Link 
+                          to="/" 
+                          className="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                        >
+                          Write Your First Restaurant Review
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {userGeneralReviews.map((review) => {
+                          return (
+                            <div 
+                              key={review.id} 
+                              className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors cursor-pointer border border-gray-200"
+                              onClick={() => navigate(`/restaurant/${review.restaurant_id}`)}
+                            >
+                              <div className="flex justify-between items-start mb-2">
+                                <div className="flex items-center space-x-3">
+                                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                  </div>
+                                  <div>
+                                    <h4 className="font-semibold text-gray-800">{review.restaurant_name}</h4>
+                                    <p className="text-sm text-gray-600">Restaurant Review</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  {renderStars(review.rating)}
                                 </div>
                               </div>
-                              {review.anonymous && (
-                                <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">
-                                  Anonymous
-                                </span>
-                              )}
+                              <p className="text-gray-700 text-sm overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{review.text}</p>
+                              <div className="flex justify-between items-center mt-2">
+                                <div className="flex items-center space-x-4">
+                                  <span className="text-xs text-gray-500">
+                                    {new Date(review.created_at).toLocaleDateString()}
+                                  </span>
+                                  <div className="flex items-center space-x-1 text-xs text-gray-500">
+                                    <span>❤</span>
+                                    <span>{review.like_count || 0}</span>
+                                  </div>
+                                </div>
+                                {review.anonymous && (
+                                  <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">
+                                    Anonymous
+                                  </span>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
