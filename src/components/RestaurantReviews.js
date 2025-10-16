@@ -307,6 +307,11 @@ export default function RestaurantReviews({ restaurantId, onReviewsUpdate }) {
         await fetchUserNamesBatch(updatedReviews);
         await fetchLikeCounts(updatedReviews);
       }
+
+      // ✅ ADD THIS: Refetch restaurant stats after deletion
+      if (onReviewsUpdate) {
+        await onReviewsUpdate();
+      }
     } catch (error) {
       console.error('Error deleting review:', error);
       console.error('Review ID:', reviewId);

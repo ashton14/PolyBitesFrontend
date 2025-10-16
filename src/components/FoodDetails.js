@@ -448,6 +448,11 @@ export default function FoodDetails({ isOpen, onClose, foodItem, onRestaurantUpd
         setReviews(updatedReviews);
         setReviewStats(updatedStats);
       }
+
+      // ✅ ADD THIS: Refetch restaurant stats after deletion
+      if (onRestaurantUpdate) {
+        await onRestaurantUpdate();
+      }
     } catch (error) {
       console.error('Error deleting review:', error);
       console.error('Review ID:', reviewId);
